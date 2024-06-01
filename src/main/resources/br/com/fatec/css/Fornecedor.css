@@ -1,15 +1,9 @@
+/* Aplica estilos aos botões */
 .button {
-    -fx-background-color: #4CAF50; /* Verde */
-    -fx-text-fill: white; /* Branco */
-    -fx-font-size: 14px; /* Tamanho da fonte */
-}
-
-.label {
-    -fx-text-fill: #ff0000; /* Vermelho */
+    -fx-background-color: #FF6347; /* Cor de fundo vermelho tomate */
+    -fx-text-fill: white; /* Texto na cor branca */
     -fx-font-weight: bold; /* Negrito */
-}
-
-.text-field {
-    -fx-border-color: #0000ff; /* Azul */
-    -fx-border-width: 2px; /* Largura da borda */
+    -fx-padding: 10px; /* Espaçamento interno */
+    -fx-background-radius: 15; /* Bordas arredondadas */
+    -fx-border-radius: 15; /* Bordas arredondadas */
 }

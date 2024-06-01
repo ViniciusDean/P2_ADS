@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * JavaFX App
@@ -33,6 +35,8 @@ public class App extends Application {
             alert.showAndWait();
             System.exit(1); // Encerra o programa se a conexão com o banco de dados falhar
         }
+           
+           
         scene = new Scene(loadFXML("view/fornecedor_cadastro"));
         stage.setScene(scene);
         stage.show();

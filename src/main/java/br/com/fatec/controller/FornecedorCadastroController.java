@@ -138,7 +138,7 @@ private void showAlert(String title, String content) {
     }
 @FXML
     public void initialize() {  
-         root.getStylesheets().add(getClass().getResource("@/br/com/fatec/css/Fornecedor.css").toExternalForm());
+       //  root.getStylesheets().add(getClass().getResource("@/br/com/fatec/css/Fornecedor.css").toExternalForm());
          tab_dados.setDisable(true);
         // Itens para cmb_fornecedor
         List<String> fornecedorItems = Arrays.asList("Distribuidor", "Atacado", "Varejo");

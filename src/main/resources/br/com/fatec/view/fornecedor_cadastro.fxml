@@ -44,7 +44,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.FornecedorCadastroController" stylesheets="@br/com/fatec/css/Fornecedor.css">  
+<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.FornecedorCadastroController">  
+<stylesheets>
+    <!-- Caminho correto sem a necessidade de usar a tag <String> -->
+    /br/com/fatec/css/Fornecedor.css
+</stylesheets>
+
+
     <children>
         <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
             <children>
