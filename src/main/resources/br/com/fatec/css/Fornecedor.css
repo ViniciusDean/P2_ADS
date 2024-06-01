@@ -1,0 +1,15 @@
+.button {
+    -fx-background-color: #4CAF50; /* Verde */
+    -fx-text-fill: white; /* Branco */
+    -fx-font-size: 14px; /* Tamanho da fonte */
+}
+
+.label {
+    -fx-text-fill: #ff0000; /* Vermelho */
+    -fx-font-weight: bold; /* Negrito */
+}
+
+.text-field {
+    -fx-border-color: #0000ff; /* Azul */
+    -fx-border-width: 2px; /* Largura da borda */
+}
