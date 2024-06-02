@@ -1,5 +1,7 @@
 package br.com.fatec.controller;
 
+import br.com.fatec.DAO.FornecedorDAO;
+import br.com.fatec.model.Fornecedor;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.fxml.FXML;
@@ -28,14 +30,14 @@ public class FornecedorCadastroController {
 
     @FXML
     private TextField txt_ddd, txt_telefone, txt_cod, txt_logradouro, txt_cep,
-            txt_bairro, txt_cidade, txt_estado, txt_pais, txt_razao,
+            txt_bairro, txt_cidade, txt_estado, txt_razao,
             txt_cnpj, txt_email, txt_filtrar_nome;
 
     @FXML
     private ComboBox<String> cmb_fornecedor, cmb_tributacao, cmb_frete;
 
     @FXML
-    private RadioButton radio_devolucao, radio_prazo;
+    private RadioButton radio_devolucao, radio_cancelar;
 
     @FXML
     private Button btn_continuar, btn_voltar, btn_salvar, btn_editar, btn_excluir, btn_pesquisar;
@@ -43,6 +45,8 @@ public class FornecedorCadastroController {
     private Tab tab_endereco, tab_dados, tab_consultar;
     @FXML
     private VBox root;
+    
+    private FornecedorDAO fornecedorDAO = new FornecedorDAO();
 
     @FXML
 private void btn_continuar_click() {
@@ -138,6 +142,7 @@ private void showAlert(String title, String content) {
     }
 @FXML
     public void initialize() {  
+       btn_salvar.setOnAction(event -> validarSalvamento());
        //  root.getStylesheets().add(getClass().getResource("@/br/com/fatec/css/Fornecedor.css").toExternalForm());
          tab_dados.setDisable(true);
         // Itens para cmb_fornecedor
@@ -181,7 +186,64 @@ private void showAlert(String title, String content) {
                 campo.setStyle("");
             }
         }
-
+                     
         return todosPreenchidos;
+    }
+     private void validarSalvamento() {
+        boolean todosPreenchidos = true;
+
+        // Lista de todos os TextField que devem ser validados
+        TextField[] campos = {txt_ddd, txt_telefone, txt_cod, txt_logradouro, txt_cep,
+            txt_bairro, txt_cidade, txt_estado, txt_razao, txt_cnpj, txt_email};
+
+        for (TextField campo : campos) {
+            if (campo.getText().isEmpty()) {
+                campo.setStyle("-fx-border-color: red; -fx-border-width: 1; -fx-padding: 2;");
+                todosPreenchidos = false;
+            } else {
+                // Resetar o estilo se o campo estiver preenchido
+                campo.setStyle("");
+            }
+        }
+
+        if (!todosPreenchidos) {
+            showAlert("Erro de Validação", "Por favor, preencha todos os campos.");
+        } else {
+            String devolucao = radio_devolucao.isSelected() ? "S" : "N";
+            String cancelamento = radio_cancelar.isSelected() ? "S" : "N";
+
+               salvarDados(txt_ddd.getText(), txt_telefone.getText(), txt_cod.getText(), txt_logradouro.getText(), txt_cep.getText(), 
+                        txt_bairro.getText(), txt_cidade.getText(), txt_estado.getText(), txt_razao.getText(), 
+                        txt_cnpj.getText(), txt_email.getText(), devolucao, cancelamento,cmb_frete.);
+        
+               
+    }
+     }
+        
+          private void salvarDados(String ddd, String telefone, String cod, String logradouro, String cep, 
+                             String bairro, String cidade, String estado, String razao, 
+                             String cnpj, String email, String devolucao, String cancelamento, String frete) {
+        Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setLogradouro(logradouro);
+        fornecedor.setCep(cep);
+        fornecedor.setTelefone(ddd + telefone);
+        fornecedor.setRazao_social(razao);
+        fornecedor.setEmail(email);
+        fornecedor.setCnpj(cnpj);
+        fornecedor.setTipo_frete(frete);
+        
+        fornecedor.setDevolucao(devolucao.charAt(0));
+        fornecedor.setCancelamento(cancelamento.charAt(0));
+        
+        try {
+            if (fornecedorDAO.insere(fornecedor)) {
+                showAlert("Sucesso", "Dados salvos com sucesso!");
+            } else {
+                showAlert("Erro", "Erro ao salvar os dados.");
+            }
+        } catch (Exception e) {
+            showAlert("Erro", "Erro ao salvar os dados: " + e.getMessage());
+            System.out.println(e.getMessage());
+        }
     }
 }

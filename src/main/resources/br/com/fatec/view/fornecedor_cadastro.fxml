@@ -41,6 +41,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -68,7 +70,6 @@
                                         <Label layoutX="22.0" layoutY="185.0" text="BAIRRO:" />
                                         <Label layoutX="22.0" layoutY="230.0" text="CIDADE:" />
                                         <Label layoutX="23.0" layoutY="277.0" text="ESTADO:" />
-                                        <Label layoutX="333.0" layoutY="279.0" text="PAIS:" />
                                         <TextField fx:id="txt_telefone" layoutX="87.0" layoutY="34.0" />
                                         <TextField fx:id="txt_ddd" layoutX="18.0" layoutY="34.0" prefHeight="25.0" prefWidth="41.0" />
                                         <TextField fx:id="txt_cod" layoutX="20.0" layoutY="95.0" prefHeight="25.0" prefWidth="41.0" />
@@ -77,10 +78,15 @@
                                         <TextField fx:id="txt_cidade" layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
                                         <TextField fx:id="txt_cep" layoutX="82.0" layoutY="96.0" />
                                         <TextField fx:id="txt_estado" layoutX="18.0" layoutY="295.0" />
-                                        <TextField fx:id="txt_pais" layoutX="333.0" layoutY="295.0" />
                                         <Button fx:id="btn_continuar" layoutX="537.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_continuar_click" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #8B0000;" text="Continuar" textFill="WHITE" />
                                         <Button fx:id="btn_voltar" layoutX="563.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Voltar" textFill="WHITE" />
-                                        <Button fx:id="btn_pesquisar" layoutX="237.0" layoutY="94.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Pesquisar" textFill="WHITE" />
+                                         <Button fx:id="btn_pesquisar" layoutX="237.0" layoutY="94.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;">
+                    <graphic>
+                        <ImageView fitHeight="20" fitWidth="20">
+                            <Image url="@/Assets/search.png" />
+                        </ImageView>
+                    </graphic>
+                </Button>   
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -102,7 +108,7 @@
                                         <Label layoutX="14.0" layoutY="138.0" text="CNPJ:" />
                                         <TextField fx:id="txt_email" layoutX="14.0" layoutY="105.0" prefHeight="26.0" prefWidth="410.0" />
                                         <RadioButton fx:id="radio_devolucao" layoutX="13.0" layoutY="207.0" mnemonicParsing="false" text="FORNECEDOR ACEITA DEVOLUÇÃO?" />
-                                        <RadioButton fx:id="radio_prazo" layoutX="13.0" layoutY="249.0" mnemonicParsing="false" text="PERMITE CANCELAR PEDIDO FORA DO PRAZO?" />
+                                        <RadioButton fx:id="radio_cancelar" layoutX="13.0" layoutY="249.0" mnemonicParsing="false" text="PERMITE CANCELAR PEDIDO FORA DO PRAZO?" />
                                         <Button fx:id="btn_salvar" layoutX="568.0" layoutY="291.0" mnemonicParsing="false" onAction="#btn_salvar_click" style="-fx-background-color: #8B0000;" text="Salvar" textFill="WHITE" />
                                     </children>
                                 </AnchorPane>

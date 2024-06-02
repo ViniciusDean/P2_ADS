@@ -1,8 +1,5 @@
 /* Aplica estilos aos botões */
 .button {
-    -fx-background-color: #FF6347; /* Cor de fundo vermelho tomate */
-    -fx-text-fill: white; /* Texto na cor branca */
-    -fx-font-weight: bold; /* Negrito */
     -fx-padding: 10px; /* Espaçamento interno */
     -fx-background-radius: 15; /* Bordas arredondadas */
     -fx-border-radius: 15; /* Bordas arredondadas */

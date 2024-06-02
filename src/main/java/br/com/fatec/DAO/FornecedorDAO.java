@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class FornecedorDAO implements DAO<Fornecedor> {
-
+    private Fornecedor fornecedor;
     private PreparedStatement pst;
     private ResultSet rs;
 
     @Override
     public boolean insere(Fornecedor model) throws SQLException {
-        String sql = "INSERT INTO fornecedor (logradouro, cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO fornecedor (logradouro, cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, model.getLogradouro());
@@ -128,4 +128,5 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         Banco.desconectar();
         return listagem;
     }
+    
 }

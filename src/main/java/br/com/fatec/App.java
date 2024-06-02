@@ -26,7 +26,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException, SQLException {
            try {
-            Banco.conectar(); // Verifica a conexão com o banco de dados na inicialização
+                Banco.conectar(); // Verifica a conexão com o banco de dados na inicialização
         } catch (SQLException e) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro de Conexão com o Banco de Dados");
