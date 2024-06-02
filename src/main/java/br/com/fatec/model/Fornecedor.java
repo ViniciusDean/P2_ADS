@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -13,15 +13,16 @@ import java.util.Objects;
 public class Fornecedor {
 
     private int id;
-    private String cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, logradouro;
+    private String cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, logradouro, tipo_fornecedor;
     private char devolucao, cancelamento;
 
     public Fornecedor() {
     }
 
-    public Fornecedor(int id, String logradouro, String cep, String telefone, String razao_social, String email, String cnpj, String regime_tributacao, String tipo_frete, char devolucao, char cancelamento) {
+    public Fornecedor(int id, String logradouro, String cep, String telefone, String razao_social, String email, String cnpj, String regime_tributacao, String tipo_frete, String tipo_fornecedor, char devolucao, char cancelamento) {
         this.id = id;
         this.logradouro = logradouro;
+        this.tipo_fornecedor = tipo_fornecedor;
         this.cep = cep;
         this.telefone = telefone;
         this.razao_social = razao_social;
@@ -31,6 +32,14 @@ public class Fornecedor {
         this.tipo_frete = tipo_frete;
         this.devolucao = devolucao;
         this.cancelamento = cancelamento;
+    }
+
+    public String getTipo_fornecedor() {
+        return tipo_fornecedor;
+    }
+
+    public void setTipo_fornecedor(String tipo_fornecedor) {
+        this.tipo_fornecedor = tipo_fornecedor;
     }
 
     public int getId() {

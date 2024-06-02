@@ -64,7 +64,6 @@
                                     <children>
                                         <Label layoutX="20.0" layoutY="16.0" text="DDD" />
                                         <Label layoutX="85.0" layoutY="16.0" text="TELEFONE" />
-                                        <Label layoutX="20.0" layoutY="80.0" text="CÓDIGO:" />
                                         <Label layoutX="85.0" layoutY="80.0" text="CEP:" />
                                         <Label layoutX="21.0" layoutY="136.0" text="LOGRADOURO:" />
                                         <Label layoutX="22.0" layoutY="185.0" text="BAIRRO:" />
@@ -72,7 +71,6 @@
                                         <Label layoutX="23.0" layoutY="277.0" text="ESTADO:" />
                                         <TextField fx:id="txt_telefone" layoutX="87.0" layoutY="34.0" />
                                         <TextField fx:id="txt_ddd" layoutX="18.0" layoutY="34.0" prefHeight="25.0" prefWidth="41.0" />
-                                        <TextField fx:id="txt_cod" layoutX="20.0" layoutY="95.0" prefHeight="25.0" prefWidth="41.0" />
                                         <TextField fx:id="txt_logradouro" layoutX="20.0" layoutY="152.0" prefHeight="25.0" prefWidth="602.0" />
                                         <TextField fx:id="txt_bairro" layoutX="21.0" layoutY="202.0" prefHeight="25.0" prefWidth="602.0" />
                                         <TextField fx:id="txt_cidade" layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
