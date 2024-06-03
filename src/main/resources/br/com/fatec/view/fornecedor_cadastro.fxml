@@ -116,7 +116,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #808080;">
                                     <children>
-                                        <TableView layoutX="174.0" prefHeight="336.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
+                                        <TableView fx:id="table_fornecedor" layoutX="174.0" prefHeight="336.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
                                             <columns>
                                                 <TableColumn prefWidth="61.0" text="ID" />
                                                 <TableColumn prefWidth="194.0" text="NOME" />

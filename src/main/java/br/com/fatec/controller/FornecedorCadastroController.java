@@ -61,6 +61,10 @@ public class FornecedorCadastroController {
         }
     }
 
+    private void tab_consultar_click() {
+        loadFornecedorData();
+    }
+
     @FXML
     private void btn_voltar_click() {
         tabPane.getSelectionModel().selectPrevious();
@@ -190,6 +194,9 @@ public class FornecedorCadastroController {
         }
 
         return todosPreenchidos;
+    }
+
+    private void loadFornecedorData() {
     }
 
     private void validarSalvamento() {
