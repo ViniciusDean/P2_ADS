@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class FornecedorDAO implements DAO<Fornecedor> {
+
     private Fornecedor fornecedor;
     private PreparedStatement pst;
     private ResultSet rs;
 
     @Override
     public boolean insere(Fornecedor model) throws SQLException {
-        String sql = "INSERT INTO fornecedor (logradouro, cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO fornecedor (logradouro, cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, model.getLogradouro());
@@ -28,7 +29,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         pst.setString(8, model.getTipo_frete());
         pst.setString(9, String.valueOf(model.getDevolucao()));
         pst.setString(10, String.valueOf(model.getCancelamento()));
-        
+        pst.setInt(11, model.getId());
 
         if (pst.executeUpdate() >= 1) {
             Banco.desconectar();
@@ -128,5 +129,23 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         Banco.desconectar();
         return listagem;
     }
-    
+
+    public int getNextId() throws SQLException {
+        Banco.conectar();
+        int nextId = 1;
+        String sql = "SELECT MAX(id) FROM fornecedor";
+        pst = Banco.obterConexao().prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            nextId = rs.getInt(1) + 1;
+        }
+
+        rs.close();
+        pst.close();
+        Banco.desconectar();
+
+        return nextId;
+    }
+
 }

@@ -4,7 +4,7 @@ CREATE DATABASE Distribuidora;
 USE Distribuidora;
 
 CREATE TABLE fornecedor (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     CEP VARCHAR(20),
     logradouro VARCHAR(100),
     telefone VARCHAR(20),
@@ -47,10 +47,10 @@ ALTER TABLE produto ADD CONSTRAINT FK_DISTRIB
     REFERENCES fornecedor (id);
 
 -- Inserção de dados na tabela fornecedor
-INSERT INTO fornecedor (CEP, logradouro, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES
-('04538-133', '3003', '11 1234-5678', 'Ambev S.A.', 'contato@ambev.com.br', '75.179.792/0001-86', 'Lucro Real', 'CIF', 'N', 'N'),
-('04709-111', '2001', '11 2345-6789', 'Nestlé Brasil Ltda.', 'contato@nestle.com.br', '60.409.075/0001-52', 'Lucro Real', 'FOB', 'S', 'N'),
-('03178-200', '123', '11 3456-7890', 'Pão de Açúcar', 'contato@paodeacucar.com.br', '47.508.411/0001-56', 'Lucro Presumido', 'CIF', 'N', 'S');
+INSERT INTO fornecedor (id, CEP, logradouro, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES
+(1,'04538-133', '3003', '11 1234-5678', 'Ambev S.A.', 'contato@ambev.com.br', '75179792000186', 'Lucro Real', 'CIF', 'N', 'N'),
+(2,'04709-111', '2001', '11 2345-6789', 'Nestlé Brasil Ltda.', 'contato@nestle.com.br', '60409075000152', 'Lucro Real', 'FOB', 'S', 'N'),
+(3,'03178-200', '123', '11 3456-7890', 'Pão de Açúcar', 'contato@paodeacucar.com.br', '47508411000156', 'Lucro Presumido', 'CIF', 'N', 'S');
 
 -- Inserção de dados na tabela produto
 INSERT INTO produto (nome, codigo_barras, preco_venda, preco_custo, embalagem, fornecedor_id, quantidade) VALUES

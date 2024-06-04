@@ -9,9 +9,12 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -20,7 +23,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import org.json.JSONObject;
 
@@ -34,20 +40,28 @@ public class FornecedorCadastroController {
     @FXML
     private TextField txt_ddd, txt_telefone, txt_logradouro, txt_cep,
             txt_bairro, txt_cidade, txt_estado, txt_razao,
-            txt_cnpj, txt_email, txt_filtrar_nome;
+            txt_cnpj, txt_email, txt_filtrar_nome, txt_id;
 
     @FXML
     private ComboBox<String> cmb_fornecedor, cmb_tributacao, cmb_frete;
+    @FXML
+    private TableView table_fornecedor;
 
     @FXML
     private RadioButton radio_devolucao, radio_cancelar;
 
     @FXML
-    private Button btn_continuar, btn_voltar, btn_salvar, btn_editar, btn_excluir, btn_pesquisar;
+    private Button btn_continuar, btn_voltar, btn_salvar, btn_editar, btn_excluir, btn_pesquisar, btn_cancelarEdit;
     @FXML
     private Tab tab_endereco, tab_dados, tab_consultar;
     @FXML
     private VBox root;
+    @FXML
+    private TableColumn<Fornecedor, String> col_id;
+    @FXML
+    private TableColumn<Fornecedor, String> col_cnpj;
+    @FXML
+    private TableColumn<Fornecedor, String> col_razao;
 
     private FornecedorDAO fornecedorDAO = new FornecedorDAO();
 
@@ -61,8 +75,9 @@ public class FornecedorCadastroController {
         }
     }
 
-    private void tab_consultar_click() {
-        loadFornecedorData();
+    @FXML
+    private void btn_cancelarEdit_click() {
+
     }
 
     @FXML
@@ -146,9 +161,25 @@ public class FornecedorCadastroController {
         return Pattern.matches("\\d+", tf.getText());
     }
 
+    private void searchId() {
+        try {
+            int nextId = fornecedorDAO.getNextId();
+            txt_id.setText(String.valueOf(nextId));
+            txt_id.setEditable(false); // Torna o campo somente leitura
+        } catch (SQLException e) {
+            showAlert("Erro ao buscar próximo ID", e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
     @FXML
     public void initialize() {
-        //  root.getStylesheets().add(getClass().getResource("@/br/com/fatec/css/Fornecedor.css").toExternalForm());
+        searchId();
+
+        loadFornecedorData();
+        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_cnpj.setCellValueFactory(new PropertyValueFactory<>("cnpj"));
+        col_razao.setCellValueFactory(new PropertyValueFactory<>("razao_social"));
+
         tab_dados.setDisable(true);
         // Itens para cmb_fornecedor
         List<String> fornecedorItems = Arrays.asList("DISTRIBUIDOR", "ATACADO", "VAREJO");
@@ -197,6 +228,18 @@ public class FornecedorCadastroController {
     }
 
     private void loadFornecedorData() {
+        ObservableList<Fornecedor> fornecedores = FXCollections.observableArrayList();
+
+        try {
+            Collection<Fornecedor> listaFornecedores = fornecedorDAO.lista("");
+            fornecedores.addAll(listaFornecedores);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Mostrar alerta de erro, se necessário
+            showAlert("Erro ao carregar dados", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+        table_fornecedor.setItems(fornecedores);
     }
 
     private void validarSalvamento() {
@@ -211,7 +254,7 @@ public class FornecedorCadastroController {
                 campo.setStyle("-fx-border-color: red; -fx-border-width: 1; -fx-padding: 2;");
                 todosPreenchidos = false;
             } else {
-                // Resetar o estilo se o campo estiver preenchido
+
                 campo.setStyle("");
             }
         }
@@ -222,11 +265,39 @@ public class FornecedorCadastroController {
             devolucao = radio_devolucao.isSelected() ? "S" : "N";
             cancelamento = radio_cancelar.isSelected() ? "S" : "N";
             salvarDados();
+            limparCampos();
+            searchId();
+            tab_dados.setDisable(true);
+
+            tabPane.getSelectionModel().select(tab_endereco);
+
         }
+    }
+
+    @FXML
+    private void limparCampos() {
+        TextField[] campos = {
+            txt_id, txt_ddd, txt_telefone, txt_logradouro, txt_cep,
+            txt_bairro, txt_cidade, txt_estado, txt_razao,
+            txt_cnpj, txt_email
+        };
+
+        for (TextField campo : campos) {
+            campo.clear();
+            campo.setStyle(""); // Reseta o estilo dos campos
+        }
+
+        cmb_fornecedor.getSelectionModel().clearSelection();
+        cmb_tributacao.getSelectionModel().clearSelection();
+        cmb_frete.getSelectionModel().clearSelection();
+
+        radio_devolucao.setSelected(false);
+        radio_cancelar.setSelected(false);
     }
 
     private void salvarDados() {
         Fornecedor fornecedor = new Fornecedor();
+        fornecedor.setId(Integer.parseInt(txt_id.getText()));
         fornecedor.setTipo_fornecedor(cmb_fornecedor.getValue());
         fornecedor.setRegime_tributacao(cmb_tributacao.getValue());
         fornecedor.setTipo_frete(cmb_frete.getValue());

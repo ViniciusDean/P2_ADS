@@ -1,37 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -47,92 +15,95 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.FornecedorCadastroController">  
-<stylesheets>
-    <!-- Caminho correto sem a necessidade de usar a tag <String> -->
-    /br/com/fatec/css/Fornecedor.css
-</stylesheets>
+    <stylesheets>
+        <!-- Caminho correto sem a necessidade de usar a tag <String> -->
+        /br/com/fatec/css/Fornecedor.css
+    </stylesheets>
 
 
-    <children>
-        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
-            <children>
-                <TabPane fx:id="tabPane" layoutY="1.0" prefHeight="393.0" prefWidth="640.0" style="-fx-background-color: #FFFF;" tabClosingPolicy="UNAVAILABLE">
-                    <tabs>
-                        <Tab fx:id="tab_endereco" style="-fx-background-color: #FFFF;" text="Endereço">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #dcdcdc;">
-                                    <children>
-                                        <Label layoutX="20.0" layoutY="16.0" text="DDD" />
-                                        <Label layoutX="85.0" layoutY="16.0" text="TELEFONE" />
-                                        <Label layoutX="85.0" layoutY="80.0" text="CEP:" />
-                                        <Label layoutX="21.0" layoutY="136.0" text="LOGRADOURO:" />
-                                        <Label layoutX="22.0" layoutY="185.0" text="BAIRRO:" />
-                                        <Label layoutX="22.0" layoutY="230.0" text="CIDADE:" />
-                                        <Label layoutX="23.0" layoutY="277.0" text="ESTADO:" />
-                                        <TextField fx:id="txt_telefone" layoutX="87.0" layoutY="34.0" />
-                                        <TextField fx:id="txt_ddd" layoutX="18.0" layoutY="34.0" prefHeight="25.0" prefWidth="41.0" />
-                                        <TextField fx:id="txt_logradouro" layoutX="20.0" layoutY="152.0" prefHeight="25.0" prefWidth="602.0" />
-                                        <TextField fx:id="txt_bairro" layoutX="21.0" layoutY="202.0" prefHeight="25.0" prefWidth="602.0" />
-                                        <TextField fx:id="txt_cidade" layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
-                                        <TextField fx:id="txt_cep" layoutX="82.0" layoutY="96.0" />
-                                        <TextField fx:id="txt_estado" layoutX="18.0" layoutY="295.0" />
-                                        <Button fx:id="btn_continuar" layoutX="537.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_continuar_click" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #8B0000;" text="Continuar" textFill="WHITE" />
-                                        <Button fx:id="btn_voltar" layoutX="563.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Voltar" textFill="WHITE" />
-                                         <Button fx:id="btn_pesquisar" layoutX="237.0" layoutY="94.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;">
-                    <graphic>
-                        <ImageView fitHeight="20" fitWidth="20">
-                            <Image url="@/Assets/search.png" />
-                        </ImageView>
-                    </graphic>
-                </Button>   
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                        <Tab fx:id="tab_dados" style="-fx-background-color: #FFFF;" text="Dados Cadastrais">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="640.0" style="-fx-background-color: #dcdcdc;">
-                                    <children>
-                                        <Label layoutX="495.0" layoutY="34.0" text="TIPO FORNECEDOR:" />
-                                        <ComboBox fx:id="cmb_fornecedor" layoutX="460.0" layoutY="54.0" prefHeight="27.0" prefWidth="153.0" promptText="DISTRIBUIDOR" />
-                                        <Label layoutX="14.0" layoutY="33.0" text="RAZÃO SOCIAL:" />
-                                        <TextField fx:id="txt_razao" layoutX="12.0" layoutY="51.0" prefHeight="26.0" prefWidth="410.0" />
-                                        <Label layoutX="14.0" layoutY="87.0" text="EMAIL:" />
-                                        <TextField fx:id="txt_cnpj" layoutX="14.0" layoutY="156.0" prefHeight="26.0" prefWidth="154.0" />
-                                        <Label layoutX="459.0" layoutY="139.0" text="REGIME DE TRIBUTAÇÃO:" />
-                                        <ComboBox fx:id="cmb_tributacao" layoutX="461.0" layoutY="160.0" prefHeight="26.0" prefWidth="151.0" promptText="ESPECIAL" />
-                                        <Label layoutX="520.0" layoutY="83.0" text="TIPO DE FRETE:" />
-                                        <ComboBox fx:id="cmb_frete" layoutX="462.0" layoutY="104.0" prefHeight="26.0" prefWidth="151.0" promptText="TERCEIROS" />
-                                        <Label layoutX="14.0" layoutY="138.0" text="CNPJ:" />
-                                        <TextField fx:id="txt_email" layoutX="14.0" layoutY="105.0" prefHeight="26.0" prefWidth="410.0" />
-                                        <RadioButton fx:id="radio_devolucao" layoutX="13.0" layoutY="207.0" mnemonicParsing="false" text="FORNECEDOR ACEITA DEVOLUÇÃO?" />
-                                        <RadioButton fx:id="radio_cancelar" layoutX="13.0" layoutY="249.0" mnemonicParsing="false" text="PERMITE CANCELAR PEDIDO FORA DO PRAZO?" />
-                                        <Button fx:id="btn_salvar" layoutX="568.0" layoutY="291.0" mnemonicParsing="false" onAction="#btn_salvar_click" style="-fx-background-color: #8B0000;" text="Salvar" textFill="WHITE" />
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                        <Tab fx:id="tab_consultar" style="-fx-background-color: #FFFF;" text="Consultar">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #808080;">
-                                    <children>
-                                        <TableView fx:id="table_fornecedor" layoutX="174.0" prefHeight="336.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
-                                            <columns>
-                                                <TableColumn prefWidth="61.0" text="ID" />
-                                                <TableColumn prefWidth="194.0" text="NOME" />
-                                                <TableColumn prefWidth="194.0" text="EMAIL" />
-                                            </columns>
-                                        </TableView>
-                                        <TextField fx:id="txt_filtrar_nome" layoutX="10.0" layoutY="54.0" promptText="NOME:" style="-fx-background-color: #FFFFFF;" />
-                                        <Button fx:id="btn_editar" layoutX="51.0" layoutY="138.0" mnemonicParsing="false" onAction="#btn_editar_click" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #8B0000;" text="EDITAR" textFill="WHITE" />
-                                        <Button fx:id="btn_excluir" layoutX="54.0" layoutY="205.0" mnemonicParsing="false" onAction="#btn_excluir_click" style="-fx-background-color: #8B0000;" text="EXCLUIR" textFill="WHITE" />
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                        </Tab>
-                    </tabs>
-                </TabPane>
-            </children>
-        </AnchorPane>
-    </children>
-</VBox>
+        <children>
+            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
+                <children>
+                    <TabPane fx:id="tabPane" layoutY="1.0" prefHeight="393.0" prefWidth="640.0" style="-fx-background-color: #FFFF;" tabClosingPolicy="UNAVAILABLE">
+                        <tabs>
+                            <Tab fx:id="tab_endereco" style="-fx-background-color: #FFFF;" text="Endereço">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #dcdcdc;">
+                                        <children>
+                                            <Label layoutX="22.0" layoutY="77.0" text="DDD" />
+                                            <Label layoutX="87.0" layoutY="77.0" text="TELEFONE" />
+                                            <Label layoutX="276.0" layoutY="59.0" text="CEP:" />
+                                            <Label layoutX="21.0" layoutY="136.0" text="LOGRADOURO:" />
+                                            <Label layoutX="22.0" layoutY="185.0" text="BAIRRO:" />
+                                            <Label layoutX="22.0" layoutY="230.0" text="CIDADE:" />
+                                            <Label layoutX="23.0" layoutY="277.0" text="ESTADO:" />
+                                            <TextField fx:id="txt_telefone" layoutX="93.0" layoutY="96.0" />
+                                            <TextField fx:id="txt_ddd" layoutX="23.0" layoutY="96.0" prefHeight="25.0" prefWidth="41.0" />
+                                            <TextField fx:id="txt_logradouro" layoutX="20.0" layoutY="152.0" prefHeight="25.0" prefWidth="602.0" />
+                                            <TextField fx:id="txt_bairro" layoutX="21.0" layoutY="202.0" prefHeight="25.0" prefWidth="602.0" />
+                                            <TextField fx:id="txt_cidade" layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
+                                            <TextField fx:id="txt_cep" layoutX="276.0" layoutY="96.0" />
+                                            <TextField fx:id="txt_estado" layoutX="18.0" layoutY="295.0" />
+                                            <Button fx:id="btn_continuar" layoutX="537.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_continuar_click" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #8B0000;" text="Continuar" textFill="WHITE" />
+                                            <Button fx:id="btn_voltar" layoutX="563.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Voltar" textFill="WHITE" />
+                                             <Button fx:id="btn_pesquisar" layoutX="448.0" layoutY="95.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;">
+                        <graphic>
+                            <ImageView fitHeight="20" fitWidth="20">
+                                <Image url="@/Assets/search.png" />
+                            </ImageView>
+                        </graphic>
+                    </Button>
+                              <TextField fx:id="txt_id" layoutX="20.0" layoutY="26.0" prefHeight="26.0" prefWidth="38.0" />
+                              <Label layoutX="17.0" layoutY="2.0" text="ID" />
+                              <Button fx:id="btn_cancelarEdit" disable="true" layoutX="103.0" layoutY="25.0" mnemonicParsing="false" onAction="#btn_cancelarEdit_click" prefHeight="28.0" prefWidth="103.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" />   
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                            <Tab fx:id="tab_dados" style="-fx-background-color: #FFFF;" text="Dados Cadastrais">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="640.0" style="-fx-background-color: #dcdcdc;">
+                                        <children>
+                                            <Label layoutX="495.0" layoutY="34.0" text="TIPO FORNECEDOR:" />
+                                            <ComboBox fx:id="cmb_fornecedor" layoutX="460.0" layoutY="54.0" prefHeight="27.0" prefWidth="153.0" promptText="DISTRIBUIDOR" />
+                                            <Label layoutX="14.0" layoutY="33.0" text="RAZÃO SOCIAL:" />
+                                            <TextField fx:id="txt_razao" layoutX="12.0" layoutY="51.0" prefHeight="26.0" prefWidth="410.0" />
+                                            <Label layoutX="14.0" layoutY="87.0" text="EMAIL:" />
+                                            <TextField fx:id="txt_cnpj" layoutX="14.0" layoutY="156.0" prefHeight="26.0" prefWidth="154.0" />
+                                            <Label layoutX="459.0" layoutY="139.0" text="REGIME DE TRIBUTAÇÃO:" />
+                                            <ComboBox fx:id="cmb_tributacao" layoutX="461.0" layoutY="160.0" prefHeight="26.0" prefWidth="151.0" promptText="ESPECIAL" />
+                                            <Label layoutX="520.0" layoutY="83.0" text="TIPO DE FRETE:" />
+                                            <ComboBox fx:id="cmb_frete" layoutX="462.0" layoutY="104.0" prefHeight="26.0" prefWidth="151.0" promptText="TERCEIROS" />
+                                            <Label layoutX="14.0" layoutY="138.0" text="CNPJ:" />
+                                            <TextField fx:id="txt_email" layoutX="14.0" layoutY="105.0" prefHeight="26.0" prefWidth="410.0" />
+                                            <RadioButton fx:id="radio_devolucao" layoutX="13.0" layoutY="207.0" mnemonicParsing="false" text="FORNECEDOR ACEITA DEVOLUÇÃO?" />
+                                            <RadioButton fx:id="radio_cancelar" layoutX="13.0" layoutY="249.0" mnemonicParsing="false" text="PERMITE CANCELAR PEDIDO FORA DO PRAZO?" />
+                                            <Button fx:id="btn_salvar" layoutX="568.0" layoutY="291.0" mnemonicParsing="false" onAction="#btn_salvar_click" style="-fx-background-color: #8B0000;" text="Salvar" textFill="WHITE" />
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                            <Tab fx:id="tab_consultar" style="-fx-background-color: #FFFF;" text="Consultar">
+                                <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #808080;">
+                                        <children>
+                                            <TableView fx:id="table_fornecedor" layoutX="174.0" prefHeight="336.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
+                                                <columns>
+                                                    <TableColumn fx:id="col_id" text="CEP" />
+                                                    <TableColumn fx:id="col_cnpj" text="cnpj" />
+                                                    <TableColumn fx:id="col_razao" prefWidth="148.0" text="Razao" />
+                                                </columns>
+                                            </TableView>
+                                            <TextField fx:id="txt_filtrar_nome" layoutX="10.0" layoutY="54.0" promptText="NOME:" style="-fx-background-color: #FFFFFF;" />
+                                            <Button fx:id="btn_editar" layoutX="51.0" layoutY="138.0" mnemonicParsing="false" onAction="#btn_editar_click" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #8B0000;" text="EDITAR" textFill="WHITE" />
+                                            <Button fx:id="btn_excluir" layoutX="54.0" layoutY="205.0" mnemonicParsing="false" onAction="#btn_excluir_click" style="-fx-background-color: #8B0000;" text="EXCLUIR" textFill="WHITE" />
+                                        </children>
+                                    </AnchorPane>
+                                </content>
+                            </Tab>
+                        </tabs>
+                    </TabPane>
+                </children>
+            </AnchorPane>
+        </children>
+    </VBox>
