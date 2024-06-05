@@ -1,10 +1,8 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package br.com.fatec.model;
-
-import java.util.Objects;
 
 /**
  *
@@ -13,7 +11,7 @@ import java.util.Objects;
 public class Fornecedor {
 
     private int id;
-    private String cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, logradouro, tipo_fornecedor;
+    private String cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, tipo_fornecedor;
     private char devolucao, cancelamento;
 
     public Fornecedor() {
@@ -21,7 +19,6 @@ public class Fornecedor {
 
     public Fornecedor(int id, String logradouro, String cep, String telefone, String razao_social, String email, String cnpj, String regime_tributacao, String tipo_frete, String tipo_fornecedor, char devolucao, char cancelamento) {
         this.id = id;
-        this.logradouro = logradouro;
         this.tipo_fornecedor = tipo_fornecedor;
         this.cep = cep;
         this.telefone = telefone;
@@ -49,16 +46,6 @@ public class Fornecedor {
     public void setId(int id) {
         this.id = id;
     }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-
 
     public String getCep() {
         return cep;

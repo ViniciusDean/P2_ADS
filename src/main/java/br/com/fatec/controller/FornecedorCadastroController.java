@@ -1,7 +1,10 @@
 package br.com.fatec.controller;
 
 import br.com.fatec.DAO.FornecedorDAO;
+import br.com.fatec.DAO.ProdutoDAO;
 import br.com.fatec.model.Fornecedor;
+import br.com.fatec.model.Produto;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -17,10 +20,17 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Hyperlink;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -29,6 +39,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.json.JSONObject;
 
 public class FornecedorCadastroController {
@@ -65,6 +76,8 @@ public class FornecedorCadastroController {
     private TableColumn<Fornecedor, String> col_razao;
 
     private FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
+
     private ObservableList<Fornecedor> fornecedores;
 
     @FXML
@@ -100,7 +113,10 @@ public class FornecedorCadastroController {
                 Fornecedor fornecedor = fornecedorDAO.buscaID(fornecedorSelecionado);
                 if (fornecedor != null) {
                     preencherCampos(fornecedor);
+                    buscarCep(fornecedor.getCep());
                     btn_cancelarEdit.setDisable(false); // Habilita o botão de cancelar edição
+                    tabPane.getSelectionModel().select(0);
+                    tab_dados.setDisable(false);
                 } else {
                     showAlert("Erro", "Fornecedor não encontrado.", Alert.AlertType.ERROR);
                 }
@@ -112,15 +128,108 @@ public class FornecedorCadastroController {
         }
     }
 
+    private void deleteFornecedorAndProdutos(Fornecedor fornecedor) {
+        List<Produto> produtos = fornecedorDAO.getProdutosDoFornecedor(fornecedor.getId());
+
+        if (!produtos.isEmpty()) {
+            for (Produto produto : produtos) {
+
+                try {
+                    produtoDAO.removeProduto(produto.getId());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Erro ao Excluir", "Não foi possível excluir um dos produtos: " + e.getMessage(), Alert.AlertType.ERROR);
+                }
+            }
+        }
+    }
+
     @FXML
     private void btn_excluir_click() {
-        // Implementar lógica de excluir
+        Fornecedor fornecedorSelecionado = table_fornecedor.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmação de Exclusão");
+        alert.setHeaderText(null);
+
+        VBox content = new VBox();
+        Label label = new Label("Tem certeza que deseja deletar o fornecedor e seus ");
+        Hyperlink link = new Hyperlink("produtos?");
+        link.setOnAction(e -> {
+            showProducts(fornecedorSelecionado);
+            alert.close();
+        });
+
+        content.getChildren().addAll(label, link);
+        alert.getDialogPane().setContent(content);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                deleteFornecedorAndProdutos(fornecedorSelecionado);
+            }
+        });
+
+        if (fornecedorSelecionado != null) {
+            // Exibir alerta de confirmação
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Confirmação de Exclusão");
+            alerta.setHeaderText(null);
+            alerta.setContentText("Tem certeza que deseja excluir o fornecedor selecionado?");
+
+            // Opções de confirmação
+            ButtonType buttonTypeSim = new ButtonType("Sim");
+            ButtonType buttonTypeNao = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alerta.getButtonTypes().setAll(buttonTypeSim, buttonTypeNao);
+
+            alerta.showAndWait().ifPresent(buttonType -> {
+                if (buttonType == buttonTypeSim) {
+                    try {
+                        // Primeiro, remove os produtos associados
+                        if (fornecedorDAO.removeProdutosDoFornecedor(fornecedorSelecionado.getId())) {
+                            // Em seguida, remove o fornecedor
+                            if (fornecedorDAO.remove(fornecedorSelecionado)) {
+                                showAlert("Sucesso", "Fornecedor excluído com sucesso!", Alert.AlertType.INFORMATION);
+                                loadFornecedorData();  // Recarrega os dados da tabela após exclusão
+                            } else {
+                                showAlert("Erro", "Erro ao excluir o fornecedor.", Alert.AlertType.ERROR);
+                            }
+                        } else {
+                            showAlert("Erro", "Erro ao excluir os produtos associados.", Alert.AlertType.ERROR);
+                        }
+                    } catch (SQLException e) {
+                        showAlert("Erro ao excluir fornecedor", e.getMessage(), Alert.AlertType.ERROR);
+                    }
+                }
+            });
+        } else {
+            showAlert("Erro", "Nenhum fornecedor selecionado.", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void showProducts(Fornecedor fornecedor) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/Deleteprodutos.fxml"));
+            Parent root = loader.load();
+            DeleteprodutosController controller = loader.getController();
+            controller.setProdutos(fornecedorDAO.getProdutosDoFornecedor(fornecedor.getId()));
+
+            Stage stage = new Stage();
+            stage.setTitle("Produtos Associados");
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void btn_pesquisar_click() {
         String cep = txt_cep.getText().replaceAll("[^\\d]", "");  // Remove qualquer caractere não numérico
-        if (cep.length() == 8) {  // CEP brasileiro tem 8 dígitos
+        buscarCep(cep);
+    }
+
+    private void buscarCep(String cep) {
+        if (cep.length() == 8) {
             String url = "https://opencep.com/v1/" + cep;
 
             HttpClient client = HttpClient.newHttpClient();
@@ -131,9 +240,9 @@ public class FornecedorCadastroController {
             client.sendAsync(request, BodyHandlers.ofString())
                     .thenApply(HttpResponse::body)
                     .thenAccept(this::processarResposta)
-                    .join();  // Usado para esperar a resposta, pode ser removido se a chamada pode ser assíncrona
+                    .join();
         } else {
-            showAlert("Erro", "CEP INVALIDO", Alert.AlertType.ERROR);
+            showAlert("Erro", "CEP Invalido!!", Alert.AlertType.ERROR);
         }
     }
 
@@ -268,7 +377,7 @@ public class FornecedorCadastroController {
             // Mostrar alerta de erro, se necessário
             showAlert("Erro ao carregar dados", e.getMessage(), Alert.AlertType.ERROR);
         }
-
+        table_fornecedor.getItems().clear();
         table_fornecedor.setItems(fornecedores);
     }
 
@@ -343,7 +452,6 @@ public class FornecedorCadastroController {
         fornecedor.setTipo_fornecedor(cmb_fornecedor.getValue());
         fornecedor.setRegime_tributacao(cmb_tributacao.getValue());
         fornecedor.setTipo_frete(cmb_frete.getValue());
-        fornecedor.setLogradouro(txt_logradouro.getText());
         fornecedor.setCep(txt_cep.getText());
         fornecedor.setTelefone(txt_ddd.getText() + " " + txt_telefone.getText());
         fornecedor.setRazao_social(txt_razao.getText());
@@ -355,21 +463,35 @@ public class FornecedorCadastroController {
         fornecedor.setCancelamento(cancelamento.charAt(0));
 
         try {
-            if (fornecedorDAO.insere(fornecedor)) {
-                showAlert("Aviso", "Dados Salvos com sucesso", Alert.AlertType.INFORMATION);
+            if (fornecedorDAO.idExiste(fornecedor.getId())) {
+                if (fornecedorDAO.altera(fornecedor)) {
+                    showAlert("Sucesso", "Fornecedor atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                    loadFornecedorData();
+                } else {
+                    showAlert("Erro", "Erro ao atualizar o fornecedor.", Alert.AlertType.ERROR);
+                }
             } else {
-                showAlert("Erro", "Houve um problema ao salvar os dados", Alert.AlertType.ERROR);
+                if (fornecedorDAO.insere(fornecedor)) {
+                    showAlert("Sucesso", "Fornecedor salvo com sucesso!", Alert.AlertType.CONFIRMATION);
+                    loadFornecedorData();
+
+                } else {
+                    showAlert("Erro", "Erro ao inserir o fornecedor.", Alert.AlertType.ERROR);
+                }
             }
+
+            limparCampos();
+        } catch (NumberFormatException e) {
+            showAlert("Erro", "ID inválido. Por favor, insira um número válido.", Alert.AlertType.ERROR);
         } catch (SQLException e) {
-            showAlert("Erro", "Erro ao salvar os dados, contate o admin", Alert.AlertType.ERROR);
+            showAlert("Erro ao salvar fornecedor", e.getMessage(), Alert.AlertType.ERROR);
         }
+
     }
 
     @FXML
     private void preencherCampos(Fornecedor fornecedor) {
         txt_id.setText(String.valueOf(fornecedor.getId()));
-        txt_telefone.setText(fornecedor.getTelefone());
-        txt_logradouro.setText(fornecedor.getLogradouro());
         txt_cep.setText(fornecedor.getCep());
         txt_razao.setText(fornecedor.getRazao_social());
         txt_cnpj.setText(fornecedor.getCnpj());
@@ -379,6 +501,14 @@ public class FornecedorCadastroController {
         cmb_frete.getSelectionModel().select(fornecedor.getTipo_frete());
         radio_devolucao.setSelected(fornecedor.getDevolucao() == 'S');
         radio_cancelar.setSelected(fornecedor.getCancelamento() == 'S');
+        String telefoneCompleto = fornecedor.getTelefone();
+        if (telefoneCompleto != null && telefoneCompleto.length() >= 2) {
+            txt_ddd.setText(telefoneCompleto.substring(0, 2)); // Os primeiros 2 dígitos são o DDD
+            txt_telefone.setText(telefoneCompleto.substring(2)); // O restante é o telefone
+        } else {
+            txt_ddd.setText("");
+            txt_telefone.setText(telefoneCompleto); // Caso o telefone esteja incorreto, ele será exibido inteiro
+        }
     }
 
 }

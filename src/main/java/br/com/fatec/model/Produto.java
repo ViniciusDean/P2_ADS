@@ -10,6 +10,7 @@ package br.com.fatec.model;
  * @author Aluno
  */
 public class Produto {
+
     /*
      Toda classe que é do tipo model deve:
      1) ter Getters e Setters
@@ -18,21 +19,15 @@ public class Produto {
         esse objeto deve ser comparado
      4) Reprogramas o toString() para informar o que deve ser
         retornado quando esse objeto é exibido
-    */
-    private int codigo;
-    private String descricao;
-    private double preco;
+     */
+    private int id, fornecedor_id, quantidade;
+    private String nome, embalagem;
+    private double preco_venda, preco_custo;
 
-    @Override
-    public String toString() {
-        return getDescricao();
-    }
-
-    
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 73 * hash + this.codigo;
+        int hash = 5;
+        hash = 59 * hash + this.id;
         return hash;
     }
 
@@ -48,45 +43,84 @@ public class Produto {
             return false;
         }
         final Produto other = (Produto) obj;
-        if (this.codigo != other.codigo) {
-            return false;
-        }
-        return true;
+        return this.id == other.id;
     }
 
-    
+    public Produto(int id, int fornecedor_id, int quantidade, String nome, String embalagem, float preco_venda, float preco_custo) {
+        this.id = id;
+        this.fornecedor_id = fornecedor_id;
+        this.quantidade = quantidade;
+        this.nome = nome;
+        this.embalagem = embalagem;
+        this.preco_venda = preco_venda;
+        this.preco_custo = preco_custo;
+    }
+
     public Produto() {
     }
 
-    public Produto(int codigo, String descricao, double preco) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-        this.preco = preco;
+    public int getId() {
+        return id;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getFornecedor_id() {
+        return fornecedor_id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setFornecedor_id(int fornecedor_id) {
+        this.fornecedor_id = fornecedor_id;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public int getQuantidade() {
+        return quantidade;
     }
 
-    public double getPreco() {
-        return preco;
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public String getNome() {
+        return nome;
     }
-    
-    
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmbalagem() {
+        return embalagem;
+    }
+
+    public void setEmbalagem(String embalagem) {
+        this.embalagem = embalagem;
+    }
+
+    public double getPreco_venda() {
+        return preco_venda;
+    }
+
+    public void setPreco_venda(double preco_venda) {
+        this.preco_venda = preco_venda;
+    }
+
+    public double getPreco_custo() {
+        return preco_custo;
+    }
+
+    public void setPreco_custo(double preco_custo) {
+        this.preco_custo = preco_custo;
+    }
+
+    public void setPreco_venda(float preco_venda) {
+        this.preco_venda = preco_venda;
+    }
+
+    public void setPreco_custo(float preco_custo) {
+        this.preco_custo = preco_custo;
+    }
+
 }
