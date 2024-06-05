@@ -29,7 +29,6 @@ public class ProdutoDAO {
         return executed > 0;
     }
 
-    // Remover Produto
     public boolean removeProduto(int produtoId) throws SQLException {
         String sql = "DELETE FROM produto WHERE id = ?";
         Banco.conectar();

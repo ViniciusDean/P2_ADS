@@ -26,7 +26,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
@@ -128,12 +127,10 @@ public class FornecedorCadastroController {
         }
     }
 
-    private void deleteFornecedorAndProdutos(Fornecedor fornecedor) {
+    private void deleteFornecedorAndProdutos(Fornecedor fornecedor) throws SQLException {
         List<Produto> produtos = fornecedorDAO.getProdutosDoFornecedor(fornecedor.getId());
-
         if (!produtos.isEmpty()) {
             for (Produto produto : produtos) {
-
                 try {
                     produtoDAO.removeProduto(produto.getId());
                 } catch (SQLException e) {
@@ -141,68 +138,39 @@ public class FornecedorCadastroController {
                     showAlert("Erro ao Excluir", "Não foi possível excluir um dos produtos: " + e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
+            fornecedorDAO.remove(fornecedor);
         }
     }
 
     @FXML
     private void btn_excluir_click() {
         Fornecedor fornecedorSelecionado = table_fornecedor.getSelectionModel().getSelectedItem();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmação de Exclusão");
-        alert.setHeaderText(null);
-
-        VBox content = new VBox();
-        Label label = new Label("Tem certeza que deseja deletar o fornecedor e seus ");
-        Hyperlink link = new Hyperlink("produtos?");
-        link.setOnAction(e -> {
-            showProducts(fornecedorSelecionado);
-            alert.close();
-        });
-
-        content.getChildren().addAll(label, link);
-        alert.getDialogPane().setContent(content);
-
-        alert.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                deleteFornecedorAndProdutos(fornecedorSelecionado);
-            }
-        });
-
         if (fornecedorSelecionado != null) {
-            // Exibir alerta de confirmação
-            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-            alerta.setTitle("Confirmação de Exclusão");
-            alerta.setHeaderText(null);
-            alerta.setContentText("Tem certeza que deseja excluir o fornecedor selecionado?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmação de Exclusão");
+            alert.setHeaderText(null);
 
-            // Opções de confirmação
-            ButtonType buttonTypeSim = new ButtonType("Sim");
-            ButtonType buttonTypeNao = new ButtonType("Não", ButtonBar.ButtonData.CANCEL_CLOSE);
-            alerta.getButtonTypes().setAll(buttonTypeSim, buttonTypeNao);
+            VBox content = new VBox();
+            Label label = new Label("Tem certeza que deseja deletar o fornecedor e seus ");
+            Hyperlink link = new Hyperlink("produtos?");
+            link.setOnAction(e -> {
+                showProducts(fornecedorSelecionado);
+            });
 
-            alerta.showAndWait().ifPresent(buttonType -> {
-                if (buttonType == buttonTypeSim) {
+            content.getChildren().addAll(label, link);
+            alert.getDialogPane().setContent(content);
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
                     try {
-                        // Primeiro, remove os produtos associados
-                        if (fornecedorDAO.removeProdutosDoFornecedor(fornecedorSelecionado.getId())) {
-                            // Em seguida, remove o fornecedor
-                            if (fornecedorDAO.remove(fornecedorSelecionado)) {
-                                showAlert("Sucesso", "Fornecedor excluído com sucesso!", Alert.AlertType.INFORMATION);
-                                loadFornecedorData();  // Recarrega os dados da tabela após exclusão
-                            } else {
-                                showAlert("Erro", "Erro ao excluir o fornecedor.", Alert.AlertType.ERROR);
-                            }
-                        } else {
-                            showAlert("Erro", "Erro ao excluir os produtos associados.", Alert.AlertType.ERROR);
-                        }
-                    } catch (SQLException e) {
-                        showAlert("Erro ao excluir fornecedor", e.getMessage(), Alert.AlertType.ERROR);
+                        deleteFornecedorAndProdutos(fornecedorSelecionado);
+                        loadFornecedorData();
+                    } catch (SQLException ex) {
+                        showAlert("ERRO", "NÃO FOI POSSIVEL DELETAR", Alert.AlertType.ERROR);
                     }
                 }
             });
-        } else {
-            showAlert("Erro", "Nenhum fornecedor selecionado.", Alert.AlertType.ERROR);
+
         }
     }
 
@@ -216,9 +184,9 @@ public class FornecedorCadastroController {
             Stage stage = new Stage();
             stage.setTitle("Produtos Associados");
             stage.setScene(new Scene(root));
-            stage.showAndWait();
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            showAlert("Erro", "Não foi possível abrir a janela de produtos", AlertType.ERROR);
         }
     }
 
