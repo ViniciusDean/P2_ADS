@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -45,7 +46,7 @@ public class FornecedorCadastroController {
     @FXML
     private ComboBox<String> cmb_fornecedor, cmb_tributacao, cmb_frete;
     @FXML
-    private TableView table_fornecedor;
+    private TableView<Fornecedor> table_fornecedor;
 
     @FXML
     private RadioButton radio_devolucao, radio_cancelar;
@@ -64,6 +65,7 @@ public class FornecedorCadastroController {
     private TableColumn<Fornecedor, String> col_razao;
 
     private FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    private ObservableList<Fornecedor> fornecedores;
 
     @FXML
     private void btn_continuar_click() {
@@ -92,7 +94,22 @@ public class FornecedorCadastroController {
 
     @FXML
     private void btn_editar_click() {
-        // Implementar lógica de editar
+        Fornecedor fornecedorSelecionado = table_fornecedor.getSelectionModel().getSelectedItem();
+        if (fornecedorSelecionado != null) {
+            try {
+                Fornecedor fornecedor = fornecedorDAO.buscaID(fornecedorSelecionado);
+                if (fornecedor != null) {
+                    preencherCampos(fornecedor);
+                    btn_cancelarEdit.setDisable(false); // Habilita o botão de cancelar edição
+                } else {
+                    showAlert("Erro", "Fornecedor não encontrado.", Alert.AlertType.ERROR);
+                }
+            } catch (SQLException e) {
+                showAlert("Erro ao buscar fornecedor", e.getMessage(), Alert.AlertType.ERROR);
+            }
+        } else {
+            showAlert("Erro", "Nenhum fornecedor selecionado.", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -204,6 +221,19 @@ public class FornecedorCadastroController {
                 cmb_frete.getItems().add(item);
             }
         });
+        txt_filtrar_nome.textProperty().addListener((observable, oldValue, newValue) -> filterFornecedores(newValue));
+    }
+
+    private void filterFornecedores(String filtro) {
+        if (fornecedores == null) {
+            return; // Certifique-se de que a lista não é nula antes de aplicar o filtro
+        }
+
+        List<Fornecedor> filtrados = fornecedores.stream()
+                .filter(f -> f.getRazao_social().toLowerCase().contains(filtro.toLowerCase()))
+                .collect(Collectors.toList());
+
+        table_fornecedor.setItems(FXCollections.observableArrayList(filtrados));
     }
 
     private boolean validarCampos() {
@@ -228,7 +258,7 @@ public class FornecedorCadastroController {
     }
 
     private void loadFornecedorData() {
-        ObservableList<Fornecedor> fornecedores = FXCollections.observableArrayList();
+        fornecedores = FXCollections.observableArrayList();
 
         try {
             Collection<Fornecedor> listaFornecedores = fornecedorDAO.lista("");
@@ -293,6 +323,18 @@ public class FornecedorCadastroController {
 
         radio_devolucao.setSelected(false);
         radio_cancelar.setSelected(false);
+
+        try {
+            int nextId = fornecedorDAO.getNextId();
+            txt_id.setText(String.valueOf(nextId));
+            txt_id.setEditable(false); // Torna o campo somente leitura
+        } catch (SQLException e) {
+            showAlert("Erro ao buscar próximo ID", e.getMessage(), Alert.AlertType.ERROR);
+        }
+
+        // Reseta o TabPane para a primeira aba
+        tabPane.getSelectionModel().select(0);
+        btn_cancelarEdit.setDisable(true); // Desativa o botão de cancelar edição
     }
 
     private void salvarDados() {
@@ -322,4 +364,21 @@ public class FornecedorCadastroController {
             showAlert("Erro", "Erro ao salvar os dados, contate o admin", Alert.AlertType.ERROR);
         }
     }
+
+    @FXML
+    private void preencherCampos(Fornecedor fornecedor) {
+        txt_id.setText(String.valueOf(fornecedor.getId()));
+        txt_telefone.setText(fornecedor.getTelefone());
+        txt_logradouro.setText(fornecedor.getLogradouro());
+        txt_cep.setText(fornecedor.getCep());
+        txt_razao.setText(fornecedor.getRazao_social());
+        txt_cnpj.setText(fornecedor.getCnpj());
+        txt_email.setText(fornecedor.getEmail());
+        cmb_fornecedor.getSelectionModel().select(fornecedor.getTipo_fornecedor());
+        cmb_tributacao.getSelectionModel().select(fornecedor.getRegime_tributacao());
+        cmb_frete.getSelectionModel().select(fornecedor.getTipo_frete());
+        radio_devolucao.setSelected(fornecedor.getDevolucao() == 'S');
+        radio_cancelar.setSelected(fornecedor.getCancelamento() == 'S');
+    }
+
 }
