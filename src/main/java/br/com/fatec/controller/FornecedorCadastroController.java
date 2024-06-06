@@ -68,11 +68,7 @@ public class FornecedorCadastroController {
     @FXML
     private VBox root;
     @FXML
-    private TableColumn<Fornecedor, String> col_id;
-    @FXML
-    private TableColumn<Fornecedor, String> col_cnpj;
-    @FXML
-    private TableColumn<Fornecedor, String> col_razao;
+    private TableColumn<Fornecedor, String> col_id, col_cnpj, col_razao;
 
     private FornecedorDAO fornecedorDAO = new FornecedorDAO();
     private ProdutoDAO produtoDAO = new ProdutoDAO();

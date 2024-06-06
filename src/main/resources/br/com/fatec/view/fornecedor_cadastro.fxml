@@ -65,15 +65,15 @@
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="640.0" style="-fx-background-color: #dcdcdc;">
                                         <children>
                                             <Label layoutX="495.0" layoutY="34.0" text="TIPO FORNECEDOR:" />
-                                            <ComboBox fx:id="cmb_fornecedor" layoutX="460.0" layoutY="54.0" prefHeight="27.0" prefWidth="153.0" promptText="DISTRIBUIDOR" />
+                                            <ComboBox fx:id="cmb_fornecedor" layoutX="460.0" layoutY="54.0" prefHeight="27.0" prefWidth="153.0" />
                                             <Label layoutX="14.0" layoutY="33.0" text="RAZÃO SOCIAL:" />
                                             <TextField fx:id="txt_razao" layoutX="12.0" layoutY="51.0" prefHeight="26.0" prefWidth="410.0" />
                                             <Label layoutX="14.0" layoutY="87.0" text="EMAIL:" />
                                             <TextField fx:id="txt_cnpj" layoutX="14.0" layoutY="156.0" prefHeight="26.0" prefWidth="154.0" />
                                             <Label layoutX="459.0" layoutY="139.0" text="REGIME DE TRIBUTAÇÃO:" />
-                                            <ComboBox fx:id="cmb_tributacao" layoutX="461.0" layoutY="160.0" prefHeight="26.0" prefWidth="151.0" promptText="ESPECIAL" />
+                                            <ComboBox fx:id="cmb_tributacao" layoutX="461.0" layoutY="160.0" prefHeight="26.0" prefWidth="151.0" />
                                             <Label layoutX="520.0" layoutY="83.0" text="TIPO DE FRETE:" />
-                                            <ComboBox fx:id="cmb_frete" layoutX="462.0" layoutY="104.0" prefHeight="26.0" prefWidth="151.0" promptText="TERCEIROS" />
+                                            <ComboBox fx:id="cmb_frete" layoutX="462.0" layoutY="104.0" prefHeight="26.0" prefWidth="151.0" />
                                             <Label layoutX="14.0" layoutY="138.0" text="CNPJ:" />
                                             <TextField fx:id="txt_email" layoutX="14.0" layoutY="105.0" prefHeight="26.0" prefWidth="410.0" />
                                             <RadioButton fx:id="radio_devolucao" layoutX="13.0" layoutY="207.0" mnemonicParsing="false" text="FORNECEDOR ACEITA DEVOLUÇÃO?" />

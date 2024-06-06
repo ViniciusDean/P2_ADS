@@ -21,7 +21,7 @@ public class Produto {
         retornado quando esse objeto é exibido
      */
     private int id, quantidade;
-    private String nome, embalagem;
+    private String nome, embalagem, data_compra, codigo_barras;
     private double preco_venda, preco_custo;
     private Fornecedor fornecedor;
 
@@ -45,6 +45,14 @@ public class Produto {
         }
         final Produto other = (Produto) obj;
         return this.id == other.id;
+    }
+
+    public String getData_compra() {
+        return data_compra;
+    }
+
+    public void setData_compra(String data_compra) {
+        this.data_compra = data_compra;
     }
 
     public Produto(int id, int quantidade, String nome, String embalagem, float preco_venda, float preco_custo, Fornecedor fornecedor) {
@@ -93,6 +101,14 @@ public class Produto {
         this.embalagem = embalagem;
     }
 
+    public String getCodigo_barras() {
+        return codigo_barras;
+    }
+
+    public void setCodigo_barras(String codigo_barras) {
+        this.codigo_barras = codigo_barras;
+    }
+
     public double getPreco_venda() {
         return preco_venda;
     }
@@ -105,24 +121,16 @@ public class Produto {
         return preco_custo;
     }
 
+    public void setPreco_custo(double preco_custo) {
+        this.preco_custo = preco_custo;
+    }
+
     public Fornecedor getFornecedor() {
         return fornecedor;
     }
 
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
-    }
-
-    public void setPreco_custo(double preco_custo) {
-        this.preco_custo = preco_custo;
-    }
-
-    public void setPreco_venda(float preco_venda) {
-        this.preco_venda = preco_venda;
-    }
-
-    public void setPreco_custo(float preco_custo) {
-        this.preco_custo = preco_custo;
     }
 
 }

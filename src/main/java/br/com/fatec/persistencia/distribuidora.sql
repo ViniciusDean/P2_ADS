@@ -20,7 +20,7 @@ CREATE TABLE fornecedor (
 CREATE TABLE produto (
     id BIGINT  PRIMARY KEY,
     nome VARCHAR(50),
-    data_compra DATE,
+    data_compra VARCHAR(40),
     codigo_barras VARCHAR(40),
     preco_venda FLOAT,
     preco_custo FLOAT,

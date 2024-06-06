@@ -49,9 +49,9 @@
     <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
       <children>
-            <TabPane layoutY="1.0" prefHeight="393.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" layoutY="1.0" prefHeight="393.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab fx:id="tab_produto" style="-fx-background-color: #fffff;" text="Produto">
+                <Tab fx:id="tab_produto" style="-fx-background-color: #FFFF;" text="Produto">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #dcdcdc;">
                            <children>
@@ -66,14 +66,12 @@
                               <Button fx:id="btn_voltar" layoutX="563.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Voltar" textFill="WHITE" />
                               <Label layoutX="407.0" layoutY="136.0" text="QUANTIDADE " />
                               <Label layoutX="409.0" layoutY="70.0" text="EMBALAGEM" />
-                              <ComboBox fx:id="cmb_embalagem" layoutX="406.0" layoutY="90.0" prefWidth="150.0" promptText="VASILHAME" />
+                              <ComboBox fx:id="cmb_embalagem" layoutX="406.0" layoutY="90.0" prefWidth="150.0" />
                               <Label layoutX="18.0" layoutY="136.0" text="CÓDIGO DE BARRAS UNIDADE" />
                               <TextField fx:id="txt_codigoBarras" layoutX="15.0" layoutY="153.0" prefHeight="26.0" prefWidth="292.0" />
                               <Label layoutX="171.0" layoutY="205.0" text="PREÇO DE CUSTO:" />
                               <TextField fx:id="txt_precoCusto" layoutX="171.0" layoutY="222.0" prefHeight="26.0" prefWidth="55.0" />
                               <ComboBox fx:id="cmb_fornecedor" layoutX="406.0" layoutY="220.0" prefWidth="150.0" />
-                              <Label layoutX="21.0" layoutY="268.0" text="LUCRO" />
-                              <TextField fx:id="txt_lucro" layoutX="18.0" layoutY="286.0" prefHeight="26.0" prefWidth="55.0" />
                               <DatePicker fx:id="date_inclusao" layoutX="152.0" layoutY="40.0" prefHeight="26.0" prefWidth="151.0" />
                               <Label layoutX="158.0" layoutY="23.0" text="DATA DE INCLUSÃO:" />
                               <TextField fx:id="txt_qtd" layoutX="405.0" layoutY="154.0" prefHeight="26.0" prefWidth="50.0" text="1" />
@@ -81,14 +79,15 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="tab_consultar" style="-fx-background-color: #fffff;" text="Consultar">
+                  <Tab fx:id="tab_consultar" style="-fx-background-color: #FFFF;" text="Consultar">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #808080;">
                            <children>
                               <TableView fx:id="table_produto" layoutX="174.0" prefHeight="366.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
                                 <columns>
-                                  <TableColumn prefWidth="61.0" text="ID" />
-                                  <TableColumn prefWidth="194.0" text="NOME" />
+                                  <TableColumn fx:id="col_id" prefWidth="46.4000244140625" text="ID" />
+                                  <TableColumn fx:id="col_nome" prefWidth="210.39996337890625" text="NOME" />
+                                    <TableColumn fx:id="col_qtd" prefWidth="192.79998779296875" text="Quantidade" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="txt_filtrar_nome" layoutX="10.0" layoutY="54.0" promptText="NOME:" style="-fx-background-color: #FFFFFF;" />
