@@ -20,11 +20,12 @@ CREATE TABLE fornecedor (
 CREATE TABLE produto (
     id BIGINT  PRIMARY KEY,
     nome VARCHAR(50),
+    data_compra DATE,
     codigo_barras VARCHAR(40),
     preco_venda FLOAT,
     preco_custo FLOAT,
     embalagem VARCHAR(20),
-    fornecedor_id INT NOT NULL,
+    fornecedor_id INT,
     quantidade INT
 );
 

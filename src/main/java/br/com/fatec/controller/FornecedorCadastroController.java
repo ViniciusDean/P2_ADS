@@ -128,17 +128,18 @@ public class FornecedorCadastroController {
     }
 
     private void deleteFornecedorAndProdutos(Fornecedor fornecedor) throws SQLException {
-        List<Produto> produtos = fornecedorDAO.getProdutosDoFornecedor(fornecedor.getId());
+        List<Produto> produtos = fornecedorDAO.getProdutosDoFornecedor(fornecedor);
         if (!produtos.isEmpty()) {
             for (Produto produto : produtos) {
                 try {
-                    produtoDAO.removeProduto(produto.getId());
+                    produtoDAO.remove(produto);
                 } catch (SQLException e) {
                     e.printStackTrace();
                     showAlert("Erro ao Excluir", "Não foi possível excluir um dos produtos: " + e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
             fornecedorDAO.remove(fornecedor);
+
         }
     }
 
@@ -154,7 +155,11 @@ public class FornecedorCadastroController {
             Label label = new Label("Tem certeza que deseja deletar o fornecedor e seus ");
             Hyperlink link = new Hyperlink("produtos?");
             link.setOnAction(e -> {
-                showProducts(fornecedorSelecionado);
+                try {
+                    showProducts(fornecedorSelecionado);
+                } catch (SQLException ex) {
+                    showAlert("ERRO", "NÃO FOI POSSIVEL DELETAR", Alert.AlertType.ERROR);
+                }
             });
 
             content.getChildren().addAll(label, link);
@@ -174,12 +179,12 @@ public class FornecedorCadastroController {
         }
     }
 
-    private void showProducts(Fornecedor fornecedor) {
+    private void showProducts(Fornecedor fornecedor) throws SQLException {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/Deleteprodutos.fxml"));
             Parent root = loader.load();
             DeleteprodutosController controller = loader.getController();
-            controller.setProdutos(fornecedorDAO.getProdutosDoFornecedor(fornecedor.getId()));
+            controller.setProdutos(fornecedorDAO.getProdutosDoFornecedor(fornecedor));
 
             Stage stage = new Stage();
             stage.setTitle("Produtos Associados");
@@ -472,7 +477,7 @@ public class FornecedorCadastroController {
         String telefoneCompleto = fornecedor.getTelefone();
         if (telefoneCompleto != null && telefoneCompleto.length() >= 2) {
             txt_ddd.setText(telefoneCompleto.substring(0, 2)); // Os primeiros 2 dígitos são o DDD
-            txt_telefone.setText(telefoneCompleto.substring(2)); // O restante é o telefone
+            txt_telefone.setText(telefoneCompleto.substring(3)); // O restante é o telefone
         } else {
             txt_ddd.setText("");
             txt_telefone.setText(telefoneCompleto); // Caso o telefone esteja incorreto, ele será exibido inteiro

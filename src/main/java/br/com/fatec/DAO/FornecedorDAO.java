@@ -171,16 +171,17 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         return resultado;
     }
 
-    public List<Produto> getProdutosDoFornecedor(int fornecedorId) {
+    public List<Produto> getProdutosDoFornecedor(Fornecedor fornecedor) throws SQLException {
         List<Produto> produtos = new ArrayList<>();
         String sql = "SELECT * FROM produto WHERE fornecedor_id = ?";
+        fornecedor = buscaID(fornecedor);
         try {
             Banco.conectar();
             pst = Banco.obterConexao().prepareStatement(sql);
-            pst.setInt(1, fornecedorId);
+            pst.setInt(1, fornecedor.getId());
             rs = pst.executeQuery();
             while (rs.next()) {
-                Produto produto = new Produto();
+                Produto produto = new Produto(fornecedor);
                 produto.setId(rs.getInt("id"));
                 produto.setNome(rs.getString("nome"));
                 produto.setPreco_custo(rs.getDouble("preco_custo"));

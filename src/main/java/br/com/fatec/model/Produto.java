@@ -20,9 +20,10 @@ public class Produto {
      4) Reprogramas o toString() para informar o que deve ser
         retornado quando esse objeto é exibido
      */
-    private int id, fornecedor_id, quantidade;
+    private int id, quantidade;
     private String nome, embalagem;
     private double preco_venda, preco_custo;
+    private Fornecedor fornecedor;
 
     @Override
     public int hashCode() {
@@ -46,17 +47,18 @@ public class Produto {
         return this.id == other.id;
     }
 
-    public Produto(int id, int fornecedor_id, int quantidade, String nome, String embalagem, float preco_venda, float preco_custo) {
+    public Produto(int id, int quantidade, String nome, String embalagem, float preco_venda, float preco_custo, Fornecedor fornecedor) {
         this.id = id;
-        this.fornecedor_id = fornecedor_id;
         this.quantidade = quantidade;
         this.nome = nome;
         this.embalagem = embalagem;
         this.preco_venda = preco_venda;
         this.preco_custo = preco_custo;
+        this.fornecedor = fornecedor;
     }
 
-    public Produto() {
+    public Produto(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public int getId() {
@@ -65,14 +67,6 @@ public class Produto {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getFornecedor_id() {
-        return fornecedor_id;
-    }
-
-    public void setFornecedor_id(int fornecedor_id) {
-        this.fornecedor_id = fornecedor_id;
     }
 
     public int getQuantidade() {
@@ -109,6 +103,14 @@ public class Produto {
 
     public double getPreco_custo() {
         return preco_custo;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     public void setPreco_custo(double preco_custo) {
