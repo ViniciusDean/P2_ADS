@@ -1,20 +1,15 @@
 package br.com.fatec;
 
-import br.com.fatec.DAO.FornecedorDAO;
-import br.com.fatec.model.Proprietario;
 import br.com.fatec.persistencia.Banco;
+import java.io.IOException;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * JavaFX App
@@ -25,8 +20,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
-           try {
-                Banco.conectar(); // Verifica a conexão com o banco de dados na inicialização
+        try {
+            Banco.conectar(); // Verifica a conexão com o banco de dados na inicialização
         } catch (SQLException e) {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Erro de Conexão com o Banco de Dados");
@@ -35,9 +30,8 @@ public class App extends Application {
             alert.showAndWait();
             System.exit(1); // Encerra o programa se a conexão com o banco de dados falhar
         }
-           
-           
-        scene = new Scene(loadFXML("view/fornecedor_cadastro"));
+
+        scene = new Scene(loadFXML("view/produto_cadastro"));
         stage.setScene(scene);
         stage.show();
     }

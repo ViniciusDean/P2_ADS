@@ -36,7 +36,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -45,8 +44,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="br.com.fatec.controller.ProdutoCadastroController"
-      prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.ProdutoCadastroController">  
+
     <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
       <children>
@@ -73,11 +72,11 @@
                               <Label layoutX="171.0" layoutY="205.0" text="PREÇO DE CUSTO:" />
                               <TextField fx:id="txt_precoCusto" layoutX="171.0" layoutY="222.0" prefHeight="26.0" prefWidth="55.0" />
                               <ComboBox fx:id="cmb_fornecedor" layoutX="406.0" layoutY="220.0" prefWidth="150.0" />
-                              <Spinner fx:id="cmb_qtd" layoutX="408.0" layoutY="155.0" prefHeight="26.0" prefWidth="81.0" />
                               <Label layoutX="21.0" layoutY="268.0" text="LUCRO" />
                               <TextField fx:id="txt_lucro" layoutX="18.0" layoutY="286.0" prefHeight="26.0" prefWidth="55.0" />
                               <DatePicker fx:id="date_inclusao" layoutX="152.0" layoutY="40.0" prefHeight="26.0" prefWidth="151.0" />
                               <Label layoutX="158.0" layoutY="23.0" text="DATA DE INCLUSÃO:" />
+                              <TextField fx:id="txt_qtd" layoutX="405.0" layoutY="154.0" prefHeight="26.0" prefWidth="50.0" text="1" />
                            </children>
                         </AnchorPane>
                   </content>
