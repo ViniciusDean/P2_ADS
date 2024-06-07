@@ -87,6 +87,10 @@ public class FornecedorCadastroController {
 
     @FXML
     private void btn_cancelarEdit_click() {
+        limparCampos();
+        searchId();
+        btn_cancelarEdit.setVisible(false);
+        tab_dados.setDisable(true);
 
     }
 
@@ -104,6 +108,7 @@ public class FornecedorCadastroController {
     private void btn_editar_click() {
         Fornecedor fornecedorSelecionado = table_fornecedor.getSelectionModel().getSelectedItem();
         if (fornecedorSelecionado != null) {
+            btn_cancelarEdit.setVisible(true);
             try {
                 Fornecedor fornecedor = fornecedorDAO.buscaID(fornecedorSelecionado);
                 if (fornecedor != null) {

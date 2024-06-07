@@ -121,6 +121,24 @@ public class ProdutoDAO implements DAO<Produto> {
         return listagem;
     }
 
+    public int getNextId() throws SQLException {
+        Banco.conectar();
+        int nextId = 1;
+        String sql = "SELECT MAX(id) FROM produto";
+        pst = Banco.obterConexao().prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+
+        if (rs.next()) {
+            nextId = rs.getInt(1) + 1;
+        }
+
+        rs.close();
+        pst.close();
+        Banco.desconectar();
+
+        return nextId;
+    }
+
     public boolean idExiste(int id) throws SQLException {
         String sql = "SELECT count(id) FROM produto WHERE id = ?";
         Banco.conectar();

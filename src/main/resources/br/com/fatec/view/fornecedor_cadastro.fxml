@@ -55,7 +55,7 @@
                     </Button>
                               <TextField fx:id="txt_id" layoutX="20.0" layoutY="26.0" prefHeight="26.0" prefWidth="38.0" />
                               <Label layoutX="17.0" layoutY="2.0" text="ID" />
-                              <Button fx:id="btn_cancelarEdit" disable="true" layoutX="103.0" layoutY="25.0" mnemonicParsing="false" onAction="#btn_cancelarEdit_click" prefHeight="28.0" prefWidth="103.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" />   
+                              <Button fx:id="btn_cancelarEdit" layoutX="103.0" layoutY="25.0" mnemonicParsing="false" onAction="#btn_cancelarEdit_click" prefHeight="28.0" prefWidth="103.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" visible="false" />   
                                         </children>
                                     </AnchorPane>
                                 </content>

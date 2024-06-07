@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +35,8 @@ public class ProdutoCadastroController {
     private Tab tab_produto, tab_consultar;
 
     @FXML
-    private TextField txt_id, txt_nome, txt_precoVenda, txt_precoCusto, txt_codigoBarras, txt_lucro, txt_filtrar_nome, txt_qtd;
+    private TextField txt_id, txt_nome, txt_precoVenda, txt_precoCusto, txt_codigoBarras,
+            txt_filtrar_nome, txt_qtd;
 
     @FXML
     private ComboBox<String> cmb_embalagem, cmb_fornecedor;
@@ -42,7 +45,7 @@ public class ProdutoCadastroController {
     private DatePicker date_inclusao;
 
     @FXML
-    private Button btn_salvar, btn_voltar, btn_editar, btn_excluir;
+    private Button btn_salvar, btn_voltar, btn_editar, btn_excluir, btn_cancelar;
 
     @FXML
     private TableView<Produto> table_produto;
@@ -76,18 +79,23 @@ public class ProdutoCadastroController {
                     if (produtoDAO.idExiste(produto.getId())) {
                         if (produtoDAO.altera(produto)) {
                             showAlert("Sucesso", "Produto atualizado com sucesso!", Alert.AlertType.INFORMATION);
+
                         } else {
                             showAlert("Erro", "Erro ao atualizar o produto.", Alert.AlertType.ERROR);
                         }
                     } else {
                         if (produtoDAO.insere(produto)) {
                             showAlert("Sucesso", "Produto salvo com sucesso!", Alert.AlertType.INFORMATION);
+
                         } else {
                             showAlert("Erro", "Erro ao inserir o produto.", Alert.AlertType.ERROR);
                         }
                     }
-                    loadProdutoData();
                     limparCampos();
+                    searchId();
+                    loadProdutoData();
+
+                    System.out.println("to aq");
                 }
             } catch (Exception e) {
                 if (e instanceof NumberFormatException) {
@@ -110,9 +118,18 @@ public class ProdutoCadastroController {
     }
 
     @FXML
+    private void btn_cancelar_click(ActionEvent event) {
+        limparCampos();
+        searchId();
+        btn_cancelar.setVisible(false);
+    }
+
+    @FXML
     private void btn_editar_click(ActionEvent event) {
         Produto produto = table_produto.getSelectionModel().getSelectedItem();
         if (produto != null) {
+            btn_cancelar.setVisible(true);
+
             try {
                 produto = produtoDAO.buscaID(produto);
                 if (produto != null) {
@@ -187,6 +204,9 @@ public class ProdutoCadastroController {
 
     @FXML
     public void initialize() {
+        txt_filtrar_nome.textProperty().addListener((observable, oldValue, newValue) -> filterProdutos(newValue));
+
+        searchId();
         loadProdutoData();
         col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -199,6 +219,18 @@ public class ProdutoCadastroController {
         loadFornecedorData();
     }
 
+    private void filterProdutos(String filtro) {
+        if (produtos == null) {
+            return; // Certifique-se de que a lista não é nula antes de aplicar o filtro
+        }
+
+        List<Produto> filtrados = produtos.stream()
+                .filter(p -> p.getNome().toLowerCase().contains(filtro.toLowerCase()))
+                .collect(Collectors.toList());
+
+        table_produto.setItems(FXCollections.observableArrayList(filtrados));
+    }
+
     public void limparCampos() {
         date_inclusao.setValue(LocalDate.now());
         txt_id.clear();
@@ -206,7 +238,6 @@ public class ProdutoCadastroController {
         txt_precoVenda.clear();
         txt_precoCusto.clear();
         txt_codigoBarras.clear();
-        txt_lucro.clear();
         txt_filtrar_nome.clear();
         txt_qtd.setText("1");
         cmb_embalagem.getSelectionModel().clearSelection();
@@ -226,6 +257,16 @@ public class ProdutoCadastroController {
         }
         table_produto.getItems().clear();
         table_produto.setItems(produtos);
+    }
+
+    private void searchId() {
+        try {
+            int nextId = produtoDAO.getNextId();
+            txt_id.setText(String.valueOf(nextId));
+            txt_id.setEditable(false); // Torna o campo somente leitura
+        } catch (SQLException e) {
+            showAlert("Erro ao buscar próximo ID", e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     private boolean validarCampos() {

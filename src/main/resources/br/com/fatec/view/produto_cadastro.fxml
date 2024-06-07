@@ -75,6 +75,7 @@
                               <DatePicker fx:id="date_inclusao" layoutX="152.0" layoutY="40.0" prefHeight="26.0" prefWidth="151.0" />
                               <Label layoutX="158.0" layoutY="23.0" text="DATA DE INCLUSÃO:" />
                               <TextField fx:id="txt_qtd" layoutX="405.0" layoutY="154.0" prefHeight="26.0" prefWidth="50.0" text="1" />
+                              <Button fx:id="btn_cancelar" layoutX="24.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_cancelar_click" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" visible="false" />
                            </children>
                         </AnchorPane>
                   </content>
