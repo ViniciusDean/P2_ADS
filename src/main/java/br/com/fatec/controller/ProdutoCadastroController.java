@@ -95,7 +95,6 @@ public class ProdutoCadastroController {
                     searchId();
                     loadProdutoData();
 
-                    System.out.println("to aq");
                 }
             } catch (Exception e) {
                 if (e instanceof NumberFormatException) {

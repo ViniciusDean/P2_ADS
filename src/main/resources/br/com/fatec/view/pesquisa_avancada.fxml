@@ -44,23 +44,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
+<VBox prefHeight="400" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.PesquisaAvancadaController">  <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #dcdcdc;" VBox.vgrow="ALWAYS">
          <children>
             <TabPane layoutX="238.0" prefHeight="401.0" prefWidth="403.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Consulta">
+                <Tab fx:id="tab_consulta" text="Consulta">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="26.0" prefWidth="138.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="458.0" prefWidth="462.0">
                            <children>
-                              <TableView layoutX="1.0" prefHeight="371.0" prefWidth="396.0" style="-fx-background-color: #808080;">
+                              <TableView fx:id="table_produto" prefHeight="378.0" prefWidth="403.0" style="-fx-background-color: #808080;" AnchorPane.bottomAnchor="-5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn prefWidth="50.0" text="Código" />
-                                  <TableColumn prefWidth="100.0" text="Preço" />
-                                    <TableColumn prefWidth="75.0" text="Custo" />
-                                    <TableColumn prefWidth="71.0" text="Quantidade" />
-                                    <TableColumn prefWidth="115.0" text="Fornecedor" />
+                                  <TableColumn fx:id="col_nome" prefWidth="80.0" text="Nome" />
+                                  <TableColumn fx:id="col_preco" prefWidth="50.0" text="Preço" />
+                                    <TableColumn fx:id="col_lucro" prefWidth="75.0" text="Lucro" />
+                                    <TableColumn fx:id="col_qtd" prefWidth="71.0" text="Quantidade" />
+                                    <TableColumn fx:id="col_fornecedor" prefWidth="115.0" text="Fornecedor" />
+
+
                                 </columns>
                               </TableView>
                            </children>
@@ -69,15 +70,15 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <DatePicker layoutX="69.0" layoutY="154.0" prefHeight="25.0" prefWidth="101.0" />
+            <DatePicker fx:id="date_1" layoutX="69.0" layoutY="154.0" prefHeight="25.0" prefWidth="101.0" />
             <Text layoutX="47.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De" />
             <Text layoutX="47.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Até" />
-            <CheckBox layoutX="20.0" layoutY="280.0" mnemonicParsing="false" text="Inativar Produto" />
-            <CheckBox layoutX="20.0" layoutY="302.0" mnemonicParsing="false" text="Mostrar Produtos Inativos" />
-            <Button layoutX="84.0" layoutY="353.0" mnemonicParsing="false" style="-fx-background-color: #7f0126;" text="Sair" textFill="#f8f6f6" />
-            <DatePicker layoutX="69.0" layoutY="186.0" prefHeight="25.0" prefWidth="101.0" />
-            <TextField layoutX="35.0" layoutY="81.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO PRODUTO:" />
-            <TextField layoutX="35.0" layoutY="32.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO FORNECEDOR:" />
+            <CheckBox fx:id="chk_desativar" layoutX="20.0" layoutY="280.0" mnemonicParsing="false" text="Produto desativado" />
+            <CheckBox fx:id="chk_desativado" layoutX="20.0" layoutY="302.0" mnemonicParsing="false" text="Mostrar Produtos desativados" />
+            <Button fx:id="btn_sair" layoutX="84.0" layoutY="353.0" mnemonicParsing="false" onAction="#btn_sair_click" style="-fx-background-color: #7f0126;" text="Sair" textFill="#f8f6f6" />
+            <DatePicker fx:id="date_2" layoutX="69.0" layoutY="186.0" prefHeight="25.0" prefWidth="101.0" />
+            <TextField fx:id="txt_produto" layoutX="35.0" layoutY="81.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO PRODUTO:" />
+            <TextField fx:id="txt_fornecedor" layoutX="35.0" layoutY="32.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO FORNECEDOR:" />
          </children>
     </AnchorPane>
   </children>
