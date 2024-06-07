@@ -89,6 +89,10 @@ public class Produto {
         return nome;
     }
 
+    public double getLucro() {
+        return this.preco_venda - this.preco_custo;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

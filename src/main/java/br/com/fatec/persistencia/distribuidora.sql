@@ -13,7 +13,8 @@ CREATE TABLE fornecedor (
     regime_tributacao VARCHAR(30),
     tipo_frete VARCHAR(30),
     devolucao CHAR(1),
-    cancelamento CHAR(1)
+    cancelamento CHAR(1),
+    ativo CHAR(1)
 );
 
 -- Criação da tabela produto
@@ -26,7 +27,8 @@ CREATE TABLE produto (
     preco_custo FLOAT,
     embalagem VARCHAR(20),
     fornecedor_id INT,
-    quantidade INT
+    quantidade INT, 
+ativo CHAR(1)
 );
 
 -- Criação da tabela funcionario
@@ -47,18 +49,18 @@ ALTER TABLE produto ADD CONSTRAINT FK_DISTRIB
     REFERENCES fornecedor (id);
 
 -- Inserção de dados na tabela fornecedor
-INSERT INTO fornecedor (id, CEP,  telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento) VALUES
-(1,'04538133', '11 1234-5678', 'Ambev S.A.', 'contato@ambev.com.br', '75179792000186', 'Lucro Real', 'CIF', 'N', 'N'),
-(2,'04709111', '11 2345-6789', 'Nestlé Brasil Ltda.', 'contato@nestle.com.br', '60409075000152', 'Lucro Real', 'FOB', 'S', 'N'),
-(3,'03178200', '11 3456-7890', 'Pão de Açúcar', 'contato@paodeacucar.com.br', '47508411000156', 'Lucro Presumido', 'CIF', 'N', 'S');
+INSERT INTO fornecedor (id, CEP,  telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento, ativo) VALUES
+(1,'04538133', '11 1234-5678', 'Ambev S.A.', 'contato@ambev.com.br', '75179792000186', 'Lucro Real', 'CIF', 'N', 'N', 'S'),
+(2,'04709111', '11 2345-6789', 'Nestlé Brasil Ltda.', 'contato@nestle.com.br', '60409075000152', 'Lucro Real', 'FOB', 'S', 'N', 'S'),
+(3,'03178200', '11 3456-7890', 'Pão de Açúcar', 'contato@paodeacucar.com.br', '47508411000156', 'Lucro Presumido', 'CIF', 'N', 'S', 'S');
 
 -- Inserção de dados na tabela produto
-INSERT INTO produto (id, nome, codigo_barras, preco_venda, preco_custo, embalagem, fornecedor_id, quantidade) VALUES
-(1, 'Cerveja Skol 350ml', '7891000010101', 2.50, 1.50, 'Lata', 1, 10),
-(2, 'Heineken Lata 350ml', '7891000240101', 5.50, 3.00, 'Lata', 2, 500),
-(3, 'Coca Cola 2L', '7896070101018', 10.00, 5.00, 'Garrafa', 3, 300),
-(4, 'Guaraná Antarctica 2L', '7891991010011', 7.00, 4.50, 'Garrafa', 1, 200),
-(5, 'Suco Laranja 10L', '7891000060102', 30.00, 20.00, 'Garrafa', 2, 150);
+INSERT INTO produto (id, nome, codigo_barras, preco_venda, preco_custo, embalagem, fornecedor_id, quantidade, ativo) VALUES
+(1, 'Cerveja Skol 350ml', '7891000010101', 2.50, 1.50, 'Lata', 1, 10, 'S'),
+(2, 'Heineken Lata 350ml', '7891000240101', 5.50, 3.00, 'Lata', 2, 500, 'S'),
+(3, 'Coca Cola 2L', '7896070101018', 10.00, 5.00, 'Garrafa', 3, 300, 'S'),
+(4, 'Guaraná Antarctica 2L', '7891991010011', 7.00, 4.50, 'Garrafa', 1, 200, 'S'),
+(5, 'Suco Laranja 10L', '7891000060102', 30.00, 20.00, 'Garrafa', 2, 150, 'S');
 
 -- Inserção de dados na tabela funcionario
 INSERT INTO funcionario (username, nome, email, cpf, data_nasc, contrato, CEP) VALUES

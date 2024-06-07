@@ -32,6 +32,12 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -44,56 +50,80 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.ProdutoCadastroController">  
+<VBox fx:id="root" prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.ProdutoCadastroController">  
 
     <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
       <children>
             <TabPane fx:id="tabPane" layoutY="1.0" prefHeight="393.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab fx:id="tab_produto" style="-fx-background-color: #FFFF;" text="Produto">
+                <Tab fx:id="tab_produto" style="-fx-background-color: #94abc0;" text="Produto">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #dcdcdc;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #adb2bf;">
                            <children>
-                              <Label layoutX="17.0" layoutY="23.0" text="CÓDIGO:" />
-                              <Label layoutX="19.0" layoutY="70.0" text="NOME:" />
-                              <Label layoutX="20.0" layoutY="205.0" text="PREÇO DE VENDA:" />
-                              <Label layoutX="408.0" layoutY="201.0" text="ASSOCIAR FORNECEDOR:" />
-                              <TextField fx:id="txt_id" layoutX="18.0" layoutY="38.0" prefHeight="26.0" prefWidth="38.0" />
-                              <TextField fx:id="txt_nome" layoutX="16.0" layoutY="86.0" prefHeight="26.0" prefWidth="292.0" />
-                              <TextField fx:id="txt_precoVenda" layoutX="18.0" layoutY="222.0" prefHeight="26.0" prefWidth="55.0" />
-                              <Button fx:id="btn_salvar" layoutX="537.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_salvar_click" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #8B0000;" text="Salvar" textFill="WHITE" />
-                              <Button fx:id="btn_voltar" layoutX="563.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="28.0" prefWidth="58.0" style="-fx-background-color: #8B0000;" text="Voltar" textFill="WHITE" />
-                              <Label layoutX="407.0" layoutY="136.0" text="QUANTIDADE " />
-                              <Label layoutX="409.0" layoutY="70.0" text="EMBALAGEM" />
-                              <ComboBox fx:id="cmb_embalagem" layoutX="406.0" layoutY="90.0" prefWidth="150.0" />
-                              <Label layoutX="18.0" layoutY="136.0" text="CÓDIGO DE BARRAS UNIDADE" />
-                              <TextField fx:id="txt_codigoBarras" layoutX="15.0" layoutY="153.0" prefHeight="26.0" prefWidth="292.0" />
-                              <Label layoutX="171.0" layoutY="205.0" text="PREÇO DE CUSTO:" />
-                              <TextField fx:id="txt_precoCusto" layoutX="171.0" layoutY="222.0" prefHeight="26.0" prefWidth="55.0" />
-                              <ComboBox fx:id="cmb_fornecedor" layoutX="406.0" layoutY="220.0" prefWidth="150.0" />
-                              <DatePicker fx:id="date_inclusao" layoutX="152.0" layoutY="40.0" prefHeight="26.0" prefWidth="151.0" />
-                              <Label layoutX="158.0" layoutY="23.0" text="DATA DE INCLUSÃO:" />
-                              <TextField fx:id="txt_qtd" layoutX="405.0" layoutY="154.0" prefHeight="26.0" prefWidth="50.0" text="1" />
+                              <Label layoutX="22.0" layoutY="59.0" text="CÓDIGO:" />
+                              <Label layoutX="22.0" layoutY="126.0" text="NOME:" />
+                              <Label layoutX="24.0" layoutY="262.0" text="PREÇO DE VENDA:" />
+                              <Label layoutX="387.0" layoutY="191.0" text="ASSOCIAR FORNECEDOR:" />
+                              <TextField fx:id="txt_id" layoutX="21.0" layoutY="76.0" prefHeight="26.0" prefWidth="38.0" />
+                              <TextField fx:id="txt_nome" layoutX="20.0" layoutY="143.0" prefHeight="26.0" prefWidth="292.0" />
+                              <TextField fx:id="txt_precoVenda" layoutX="22.0" layoutY="279.0" prefHeight="26.0" prefWidth="55.0" />
+                              <Button fx:id="btn_salvar" layoutX="570.0" layoutY="322.0" mnemonicParsing="false" onAction="#btn_salvar_click" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 1.5;" text="Salvar" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect></Button>
+                              <Button fx:id="btn_voltar" layoutX="567.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 1.5; -fx-background-radius: 15;" text="Voltar" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect></Button>
+                              <Label layoutX="390.0" layoutY="126.0" text="QUANTIDADE " />
+                              <Label layoutX="389.0" layoutY="59.0" text="EMBALAGEM" />
+                              <ComboBox fx:id="cmb_embalagem" layoutX="389.0" layoutY="75.0" prefWidth="150.0" />
+                              <Label layoutX="21.0" layoutY="193.0" text="CÓDIGO DE BARRAS UNIDADE" />
+                              <TextField fx:id="txt_codigoBarras" layoutX="19.0" layoutY="210.0" prefHeight="26.0" prefWidth="292.0" />
+                              <Label layoutX="175.0" layoutY="262.0" text="PREÇO DE CUSTO:" />
+                              <TextField fx:id="txt_precoCusto" layoutX="175.0" layoutY="279.0" prefHeight="26.0" prefWidth="55.0" />
+                              <ComboBox fx:id="cmb_fornecedor" layoutX="386.0" layoutY="210.0" prefWidth="150.0" />
+                              <DatePicker fx:id="date_inclusao" layoutX="156.0" layoutY="77.0" prefHeight="26.0" prefWidth="156.0" />
+                              <Label layoutX="157.0" layoutY="60.0" text="DATA DE INCLUSÃO:" />
+                              <TextField fx:id="txt_qtd" layoutX="389.0" layoutY="143.0" prefHeight="26.0" prefWidth="50.0" text="1" />
                               <Button fx:id="btn_cancelar" layoutX="24.0" layoutY="293.0" mnemonicParsing="false" onAction="#btn_cancelar_click" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" visible="false" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="tab_consultar" style="-fx-background-color: #FFFF;" text="Consultar">
+                  <Tab fx:id="tab_consultar" style="-fx-background-color: #94abc0;" text="Consultar">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #808080;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #b9b6be;">
                            <children>
-                              <TableView fx:id="table_produto" layoutX="174.0" prefHeight="366.0" prefWidth="467.0" style="-fx-background-color: #dcdcdc;">
+                              <TableView fx:id="table_produto" layoutX="174.0" prefHeight="334.0" prefWidth="467.0" style="-fx-background-color: #a1afbf;">
                                 <columns>
                                   <TableColumn fx:id="col_id" prefWidth="46.4000244140625" text="ID" />
                                   <TableColumn fx:id="col_nome" prefWidth="210.39996337890625" text="NOME" />
-                                    <TableColumn fx:id="col_qtd" prefWidth="192.79998779296875" text="Quantidade" />
+                                    <TableColumn fx:id="col_qtd" prefWidth="192.79998779296875" text="QUANTIDADE" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="txt_filtrar_nome" layoutX="10.0" layoutY="54.0" promptText="NOME:" style="-fx-background-color: #FFFFFF;" />
-                              <Button fx:id="btn_editar" layoutX="51.0" layoutY="138.0" mnemonicParsing="false" onAction="#btn_editar_click" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #8B0000;" text="EDITAR" textFill="#faf8f8" />
-                              <Button fx:id="btn_excluir" layoutX="51.0" layoutY="207.0" mnemonicParsing="false" onAction="#btn_excluir_click" style="-fx-background-color: #8B0000;" text="EXCLUIR" textFill="#f2efef" />
+                              <Button fx:id="btn_editar" layoutX="51.0" layoutY="138.0" mnemonicParsing="false" onAction="#btn_editar_click" prefHeight="30.0" prefWidth="67.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-border-width: 1.5; -fx-border-radius: 15; -fx-background-radius: 15;" text="EDITAR" textFill="#faf8f8">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect></Button>
+                              <Button fx:id="btn_excluir" layoutX="51.0" layoutY="207.0" mnemonicParsing="false" onAction="#btn_excluir_click" prefHeight="30.0" prefWidth="71.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 1.5; -fx-background-radius: 15;" text="EXCLUIR" textFill="#f2efef">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect></Button>
                            </children>
                         </AnchorPane>
                      </content>
