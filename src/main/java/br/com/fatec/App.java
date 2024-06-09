@@ -31,7 +31,7 @@ public class App extends Application {
             System.exit(1); // Encerra o programa se a conexão com o banco de dados falhar
         }
 
-        scene = new Scene(loadFXML("view/pesquisa_avancada"));
+        scene = new Scene(loadFXML("view/funcionario_cadastro"));
         stage.setScene(scene);
         stage.show();
     }

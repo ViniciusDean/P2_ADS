@@ -36,6 +36,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -50,7 +51,7 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #FFFF;" VBox.vgrow="ALWAYS">
       <children>
-            <TabPane layoutY="1.0" prefHeight="393.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" layoutY="1.0" prefHeight="393.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab style="-fx-background-color: #94abc0;" text="Endereço">
                   <content>
@@ -67,12 +68,12 @@
                               <TextField fx:id="txt_telefone" layoutX="87.0" layoutY="43.0" />
                               <TextField fx:id="txt_ddd" layoutX="18.0" layoutY="43.0" prefHeight="25.0" prefWidth="41.0" />
                               <TextField fx:id="txt_id" layoutX="20.0" layoutY="95.0" prefHeight="25.0" prefWidth="41.0" />
-                              <TextField layoutX="20.0" layoutY="152.0" prefHeight="25.0" prefWidth="602.0" />
-                              <TextField layoutX="21.0" layoutY="202.0" prefHeight="25.0" prefWidth="602.0" />
-                              <TextField layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
+                              <TextField fx:id="txt_logradouro" layoutX="20.0" layoutY="152.0" prefHeight="25.0" prefWidth="602.0" />
+                              <TextField fx:id="txt_bairro" layoutX="21.0" layoutY="202.0" prefHeight="25.0" prefWidth="602.0" />
+                              <TextField fx:id="txt_cidade" layoutX="22.0" layoutY="247.0" prefHeight="25.0" prefWidth="600.0" />
                               <TextField fx:id="txt_cep" layoutX="87.0" layoutY="96.0" prefHeight="25.0" prefWidth="150.0" />
-                              <TextField layoutX="22.0" layoutY="295.0" />
-                              <Button fx:id="btn_continuar" layoutX="540.0" layoutY="318.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Continuar" textFill="WHITE">
+                              <TextField fx:id="txt_estado" layoutX="22.0" layoutY="295.0" />
+                              <Button fx:id="btn_continuar" layoutX="540.0" layoutY="318.0" mnemonicParsing="false" onAction="#btn_continuar_click" prefHeight="31.0" prefWidth="90.0" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Continuar" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -86,6 +87,7 @@
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font></Button>
+                              <Button fx:id="btn_pesquisar" layoutX="254.0" layoutY="95.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" text="Pesquisar" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -111,6 +113,10 @@
                                     <DropShadow />
                                  </effect></Button>
                               <DatePicker fx:id="data_nasc" layoutX="460.0" layoutY="68.0" prefHeight="25.0" prefWidth="156.0" />
+                              <TextField fx:id="txt_username" layoutX="14.0" layoutY="230.0" prefHeight="26.0" prefWidth="150.0" />
+                              <Label layoutX="12.0" layoutY="206.0" text="USERNAME:" />
+                              <PasswordField fx:id="txt_senha" layoutX="217.0" layoutY="231.0" />
+                              <Label layoutX="210.0" layoutY="206.0" text="SENHA:" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -121,9 +127,9 @@
                            <children>
                               <TableView fx:id="table_view" layoutX="174.0" prefHeight="336.0" prefWidth="467.0" style="-fx-background-color: #a1afbf;">
                                 <columns>
-                                  <TableColumn fx:id="col_id" prefWidth="61.0" text="ID" />
-                                  <TableColumn fx:id="col_nome" prefWidth="194.0" text="NOME" />
-                                    <TableColumn fx:id="col_email" prefWidth="194.0" text="EMAIL" />
+                                 <TableColumn fx:id="col_id" text="ID" />
+        <TableColumn fx:id="col_nome" text="Nome" />
+        <TableColumn fx:id="col_username" text="Username" />
                                 </columns>
                               </TableView>
                               <TextField fx:id="txt_filtrar_nome" layoutX="11.0" layoutY="54.0" promptText="NOME:" style="-fx-background-color: #FFFFFF;" />

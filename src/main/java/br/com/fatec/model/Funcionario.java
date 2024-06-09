@@ -1,20 +1,22 @@
 package br.com.fatec.model;
 
-import java.time.LocalDate;
-
 public class Funcionario {
 
     private int id;
+    private String senha;
+    private String username;
     private String nome;
     private String email;
     private String cpf;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private String contrato;
     private String cep;
     private String telefone;
 
-    public Funcionario(int id, String nome, String email, String cpf, LocalDate dataNasc, String contrato, String cep, String telefone) {
+    public Funcionario(int id, String nome, String email, String cpf, String dataNasc, String contrato, String cep, String telefone, String username, String senha) {
         this.id = id;
+        this.username = username;
+        this.senha = senha;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -25,6 +27,22 @@ public class Funcionario {
     }
 
     public Funcionario() {
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
@@ -82,11 +100,11 @@ public class Funcionario {
         this.cpf = cpf;
     }
 
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 
