@@ -62,6 +62,7 @@
                                     <TableColumn fx:id="col_fornecedor" minWidth="4.800048828125" prefWidth="232.0" text="Fornecedor" />
                                 </columns>
             </TableView>
+            <Button fx:id="btn_limpar" layoutX="46.0" layoutY="320.0" mnemonicParsing="false" onAction="#btn_limpar_click" prefHeight="26.0" prefWidth="117.0" text="Limpar Filtros" />
          </children>
     </AnchorPane>
   </children>

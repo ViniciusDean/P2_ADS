@@ -32,60 +32,39 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <children>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.LoginController">  <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #294751; -fx-border-color: #dfdb72;" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="577.0" layoutY="355.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="51.0" style="-fx-background-color: #8B0000; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Sair" textFill="WHITE">
+            <Button fx:id="btn_sair" layoutX="577.0" layoutY="355.0" mnemonicParsing="false" onAction="#btn_sair_click" prefHeight="34.0" prefWidth="51.0" style="-fx-background-color: #8B0000; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Sair" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                <effect>
                   <DropShadow height="35.83" radius="18.155" spread="0.51" width="38.79" />
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
+</Button>
             <Text fill="#fffdfd" layoutX="295.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN">
                <font>
                   <Font name="Impact" size="22.0" />
                </font>
             </Text>
-            <TextField layoutX="209.0" layoutY="166.0" prefHeight="25.0" prefWidth="224.0" promptText="Usuario" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="207.0">
-               <effect>
-                  <Reflection />
-               </effect>
-            </TextField>
-            <TextField layoutX="209.0" layoutY="213.0" prefHeight="25.0" prefWidth="224.0" promptText="Senha">
-               <effect>
-                  <Reflection />
-               </effect>
-            </TextField>
-            <Hyperlink layoutX="206.0" layoutY="248.0" text="Esqueceu a senha?">
-               <font>
-                  <Font size="13.0" />
-               </font></Hyperlink>
-            <Button layoutX="286.0" layoutY="295.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="70.0" style="-fx-background-color: #82bda2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Entrar" textFill="WHITE">
+            <Button fx:id="btn_entrar" layoutX="286.0" layoutY="295.0" mnemonicParsing="false" onAction="#btn_entrar_click" prefHeight="34.0" prefWidth="70.0" style="-fx-background-color: #82bda2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Entrar" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+
                <effect>
                   <DropShadow spread="0.28" />
                </effect></Button>
@@ -94,6 +73,8 @@
                   <Image url="@imagem_2024-06-07_125604458.png" />
                </image>
             </ImageView>
+            <TextField fx:id="txt_usuario" layoutX="206.0" layoutY="175.0" prefHeight="26.0" prefWidth="224.0" promptText="Usuario" />
+            <PasswordField fx:id="txt_senha" layoutX="206.0" layoutY="215.0" prefHeight="26.0" prefWidth="224.0" promptText="Senha" />
       </children>
     </AnchorPane>
   </children>

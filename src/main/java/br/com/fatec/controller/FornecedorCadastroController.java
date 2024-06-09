@@ -96,7 +96,19 @@ public class FornecedorCadastroController {
 
     @FXML
     private void btn_voltar_click() {
-        tabPane.getSelectionModel().selectPrevious();
+        try {
+            Stage stage = (Stage) btn_voltar.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/tela_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage menuStage = new Stage();
+            menuStage.setScene(new Scene(root));
+            menuStage.show();
+        } catch (IOException e) {
+            showAlert("Erro", "Erro ao carregar a tela do menu: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -407,13 +419,7 @@ public class FornecedorCadastroController {
         radio_devolucao.setSelected(false);
         radio_cancelar.setSelected(false);
 
-        try {
-            int nextId = fornecedorDAO.getNextId();
-            txt_id.setText(String.valueOf(nextId));
-            txt_id.setEditable(false); // Torna o campo somente leitura
-        } catch (SQLException e) {
-            showAlert("Erro ao buscar próximo ID", e.getMessage(), Alert.AlertType.ERROR);
-        }
+        searchId();
 
         // Reseta o TabPane para a primeira aba
         tabPane.getSelectionModel().select(0);

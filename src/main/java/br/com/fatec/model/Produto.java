@@ -20,7 +20,7 @@ public class Produto {
      4) Reprogramas o toString() para informar o que deve ser
         retornado quando esse objeto é exibido
      */
-    private int id, quantidade;
+    private int id, quantidade, localQuantidade;
     private String nome, embalagem, data_compra, codigo_barras;
     private double preco_venda, preco_custo;
     private Fornecedor fornecedor;
@@ -65,8 +65,19 @@ public class Produto {
         this.fornecedor = fornecedor;
     }
 
+    public Produto() {
+    }
+
     public Produto(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
+    }
+
+    public int getLocalQuantidade() {
+        return localQuantidade;
+    }
+
+    public void setLocalQuantidade(int localQuantidade) {
+        this.localQuantidade = localQuantidade;
     }
 
     public int getId() {

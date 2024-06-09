@@ -3,8 +3,6 @@ package br.com.fatec.persistencia;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class Banco {
 
@@ -30,11 +28,11 @@ public class Banco {
         conexao = DriverManager.getConnection(url, usuario, senha);
 
         if (!mensagemConexaoMostrada) {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Status da Conexão com o Banco de Dados");
-            alert.setHeaderText(null);
-            alert.setContentText("Conectado ao banco de dados com sucesso!");
-            alert.showAndWait();
+            //   Alert alert = new Alert(AlertType.INFORMATION);
+            //     alert.setTitle("Status da Conexão com o Banco de Dados");
+            //     alert.setHeaderText(null);
+            //     alert.setContentText("Conectado ao banco de dados com sucesso!");
+            //    alert.showAndWait();
             mensagemConexaoMostrada = true; // Define o indicador para evitar futuras mensagens
         }
     }

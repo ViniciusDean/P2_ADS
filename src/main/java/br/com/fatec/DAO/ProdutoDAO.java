@@ -153,4 +153,24 @@ public class ProdutoDAO implements DAO<Produto> {
         }
         return false;
     }
+
+    public Produto buscaPorCodigoBarras(String codBarras) throws SQLException {
+        Produto produto = null;
+        String sql = "SELECT * FROM produto WHERE codigo_barras = ?";
+        Banco.conectar();
+        pst = Banco.obterConexao().prepareStatement(sql);
+        pst.setString(1, codBarras);
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+            produto = new Produto();
+            produto.setId(rs.getInt("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setPreco_venda(rs.getDouble("preco_venda"));
+            produto.setQuantidade(rs.getInt("quantidade"));
+        }
+
+        Banco.desconectar();
+        return produto;
+    }
 }

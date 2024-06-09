@@ -2,6 +2,7 @@ package br.com.fatec.controller;
 
 import br.com.fatec.DAO.ProdutoDAO;
 import br.com.fatec.model.Produto;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -9,6 +10,9 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -20,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class PesquisaAvancadaController {
 
@@ -53,7 +58,13 @@ public class PesquisaAvancadaController {
     private ComboBox<String> cmb_embalagem;
 
     @FXML
-    private void btn_desativar_click() {
+    private void btn_limpar_click() {
+        txt_produto.clear();
+        txt_fornecedor.clear();
+        txt_preco_min.clear();
+        txt_preco_max.clear();
+        cmb_embalagem.getSelectionModel().clearSelection();
+        loadProdutoData();
     }
 
     @FXML
@@ -125,14 +136,21 @@ public class PesquisaAvancadaController {
     }
 
     @FXML
-    private void btn_limpar_click() {
-    }
-
-    @FXML
 
     private void btn_sair_click() {
-        // Lógica para o botão sair
-        System.exit(0);
+        try {
+            Stage stage = (Stage) btn_sair.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/tela_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage menuStage = new Stage();
+            menuStage.setScene(new Scene(root));
+            menuStage.show();
+        } catch (IOException e) {
+            showAlert("Erro", "Erro ao carregar a tela do menu: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     private void loadProdutoData() {

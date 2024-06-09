@@ -4,6 +4,7 @@ import br.com.fatec.DAO.FornecedorDAO;
 import br.com.fatec.DAO.ProdutoDAO;
 import br.com.fatec.model.Fornecedor;
 import br.com.fatec.model.Produto;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -26,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class ProdutoCadastroController {
 
@@ -113,7 +118,19 @@ public class ProdutoCadastroController {
 
     @FXML
     private void btn_voltar_click(ActionEvent event) {
-        // Lógica para voltar para a tela anterior
+        try {
+            Stage stage = (Stage) btn_voltar.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/tela_menu.fxml"));
+            Parent root = loader.load();
+
+            Stage menuStage = new Stage();
+            menuStage.setScene(new Scene(root));
+            menuStage.show();
+        } catch (IOException e) {
+            showAlert("Erro", "Erro ao carregar a tela do menu: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

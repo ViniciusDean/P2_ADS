@@ -88,6 +88,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font></Button>
                               <Button fx:id="btn_pesquisar" layoutX="254.0" layoutY="95.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" text="Pesquisar" />
+                              <Button fx:id="btn_cancelar" layoutX="306.0" layoutY="43.0" mnemonicParsing="false" onAction="#btn_cancelar_click" text="Cancelar" visible="false" />
                            </children>
                         </AnchorPane>
                   </content>

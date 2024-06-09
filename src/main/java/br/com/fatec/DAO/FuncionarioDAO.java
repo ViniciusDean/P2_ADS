@@ -153,4 +153,31 @@ public class FuncionarioDAO implements DAO<Funcionario> {
         }
         return false;
     }
+
+    public Funcionario autenticar(String username, String senha) throws SQLException {
+        Funcionario funcionario = null;
+        String sql = "SELECT * FROM funcionario WHERE username = ? AND senha = ?";
+        Banco.conectar();
+        pst = Banco.obterConexao().prepareStatement(sql);
+        pst.setString(1, username);
+        pst.setString(2, senha);
+        rs = pst.executeQuery();
+
+        if (rs.next()) {
+            funcionario = new Funcionario();
+            funcionario.setId(rs.getInt("id"));
+            funcionario.setUsername(rs.getString("username"));
+            funcionario.setNome(rs.getString("nome"));
+            funcionario.setEmail(rs.getString("email"));
+            funcionario.setTelefone(rs.getString("telefone"));
+            funcionario.setSenha(rs.getString("senha"));
+            funcionario.setCpf(rs.getString("cpf"));
+            funcionario.setDataNasc(rs.getString("data_nasc"));
+            funcionario.setContrato(rs.getString("contrato"));
+            funcionario.setCep(rs.getString("CEP"));
+        }
+
+        Banco.desconectar();
+        return funcionario;
+    }
 }

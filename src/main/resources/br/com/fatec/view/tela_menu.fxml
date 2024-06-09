@@ -41,66 +41,65 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller= "br.com.fatec.controller.MenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #294751; -fx-border-color: #dfdb72;" VBox.vgrow="ALWAYS">
       <children>
-            <Button layoutX="227.0" layoutY="121.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Fornecedor" textFill="WHITE">
+            <Button fx:id="btn_fornecedor" layoutX="227.0" layoutY="97.0" mnemonicParsing="false" onAction="#btn_fornecedor_click" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Fornecedor" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <effect>
                   <DropShadow spread="0.14" />
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+
             </Button>
-            <Button layoutX="227.0" layoutY="238.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Produto" textFill="WHITE">
+            <Button fx:id="btn_produto" layoutX="227.0" layoutY="212.0" mnemonicParsing="false" onAction="#btn_produto_click" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Produto" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <effect>
                   <DropShadow height="26.86" radius="12.93" spread="0.07" width="26.86" />
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutX="227.0" layoutY="296.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Consultar Produtos" textFill="WHITE">
+</Button>
+            <Button fx:id="btn_consulta" layoutX="226.0" layoutY="266.0" mnemonicParsing="false" onAction="#btn_consulta_click" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Consultar Produtos" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <effect>
                   <DropShadow spread="0.1" />
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutX="227.0" layoutY="179.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Funcionário" textFill="WHITE">
+</Button>
+            <Button fx:id="btn_funcionario" layoutX="226.0" layoutY="157.0" mnemonicParsing="false" onAction="#btn_funcionario_click" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Cadastrar Funcionário" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <effect>
                   <DropShadow spread="0.1" />
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-            <Button layoutX="579.0" layoutY="358.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="49.0" style="-fx-background-color: #8B0000; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Sair" textFill="WHITE">
+</Button>
+            <Button fx:id="btn_sair" layoutX="567.0" layoutY="358.0" mnemonicParsing="false" onAction="#btn_sair_click" prefHeight="31.0" prefWidth="62.0" style="-fx-background-color: #8B0000; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Sair" textFill="WHITE">
                <effect>
                   <DropShadow />
                </effect>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
+</Button>
             <ImageView fitHeight="57.0" fitWidth="360.0" layoutX="140.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagem_2024-06-07_125604458.png" />
                </image>
             </ImageView>
+            <Button fx:id="btn_caixa" layoutX="226.0" layoutY="319.0" mnemonicParsing="false" onAction="#btn_caixa_click" prefHeight="42.0" prefWidth="186.0" style="-fx-background-color: #538da2; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="CAIXA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <effect>
+                  <DropShadow spread="0.14" />
+               </effect>
+
+            </Button>
       </children>
     </AnchorPane>
   </children>
