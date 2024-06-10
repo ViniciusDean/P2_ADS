@@ -1,6 +1,7 @@
 package br.com.fatec.controller;
 
 import br.com.fatec.model.Funcionario;
+import br.com.fatec.utils.SessionManager;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -79,7 +80,7 @@ public class MenuController {
         Parent root = loader.load();
         CaixaController caixaController = loader.getController();
         caixaController.setOperadorLogado(operadorLogado);
-        System.out.println(operadorLogado);
+        System.out.println(SessionManager.getOperadorLogado());
         Stage menuStage = new Stage();
         menuStage.setScene(new Scene(root));
         menuStage.show();
@@ -87,6 +88,7 @@ public class MenuController {
 
     public void setOperadorLogado(Funcionario operadorLogado) {
         this.operadorLogado = operadorLogado;
+        SessionManager.setOperadorLogado(operadorLogado); // Atualiza o SessionManager
     }
 
     private void carregarTela(String caminhoFXML) {
@@ -110,4 +112,5 @@ public class MenuController {
         alert.setContentText(content);
         alert.showAndWait();
     }
+
 }

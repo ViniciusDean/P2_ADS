@@ -57,37 +57,64 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="174.0" prefWidth="634.0" style="-fx-background-color: #adb2bf;">
                            <children>
-                              <Label layoutX="22.0" layoutY="59.0" text="CÓDIGO:" />
-                              <Label layoutX="22.0" layoutY="126.0" text="NOME:" />
-                              <Label layoutX="24.0" layoutY="262.0" text="PREÇO DE VENDA:" />
-                              <Label layoutX="387.0" layoutY="191.0" text="ASSOCIAR FORNECEDOR:" />
+                              <Label layoutX="22.0" layoutY="59.0" text="CÓDIGO:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label layoutX="22.0" layoutY="126.0" text="NOME:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label layoutX="24.0" layoutY="262.0" text="PREÇO DE VENDA:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label layoutX="387.0" layoutY="191.0" text="ASSOCIAR FORNECEDOR:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <TextField fx:id="txt_id" layoutX="21.0" layoutY="76.0" prefHeight="26.0" prefWidth="38.0" />
                               <TextField fx:id="txt_nome" layoutX="20.0" layoutY="143.0" prefHeight="26.0" prefWidth="292.0" />
                               <TextField fx:id="txt_precoVenda" layoutX="22.0" layoutY="279.0" prefHeight="26.0" prefWidth="55.0" />
-                              <Button fx:id="btn_salvar" layoutX="570.0" layoutY="322.0" mnemonicParsing="false" onAction="#btn_salvar_click" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 1.5;" text="Salvar" textFill="WHITE">
+                              <Button fx:id="btn_salvar" layoutX="564.0" layoutY="322.0" mnemonicParsing="false" onAction="#btn_salvar_click" prefHeight="30.0" prefWidth="66.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-width: 1.5;" text="Salvar" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                                  <effect>
                                     <DropShadow />
                                  </effect></Button>
-                              <Button fx:id="btn_voltar" layoutX="567.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="30.0" prefWidth="63.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 1.5; -fx-background-radius: 15;" text="Voltar" textFill="WHITE">
+                              <Button fx:id="btn_voltar" layoutX="562.0" layoutY="11.0" mnemonicParsing="false" onAction="#btn_voltar_click" prefHeight="33.0" prefWidth="68.0" style="-fx-background-color: #4b95c3; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 1.5; -fx-background-radius: 15;" text="Voltar" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                                  <effect>
                                     <DropShadow />
                                  </effect></Button>
-                              <Label layoutX="390.0" layoutY="126.0" text="QUANTIDADE " />
-                              <Label layoutX="389.0" layoutY="59.0" text="EMBALAGEM" />
+                              <Label layoutX="390.0" layoutY="126.0" text="QUANTIDADE ">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Label layoutX="389.0" layoutY="59.0" text="EMBALAGEM">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <ComboBox fx:id="cmb_embalagem" layoutX="389.0" layoutY="75.0" prefWidth="150.0" />
-                              <Label layoutX="21.0" layoutY="193.0" text="CÓDIGO DE BARRAS UNIDADE" />
+                              <Label layoutX="21.0" layoutY="193.0" text="CÓDIGO DE BARRAS UNIDADE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <TextField fx:id="txt_codigoBarras" layoutX="19.0" layoutY="210.0" prefHeight="26.0" prefWidth="292.0" />
-                              <Label layoutX="175.0" layoutY="262.0" text="PREÇO DE CUSTO:" />
+                              <Label layoutX="175.0" layoutY="262.0" text="PREÇO DE CUSTO:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <TextField fx:id="txt_precoCusto" layoutX="175.0" layoutY="279.0" prefHeight="26.0" prefWidth="55.0" />
                               <ComboBox fx:id="cmb_fornecedor" layoutX="386.0" layoutY="210.0" prefWidth="150.0" />
                               <DatePicker fx:id="date_inclusao" layoutX="156.0" layoutY="77.0" prefHeight="26.0" prefWidth="156.0" />
-                              <Label layoutX="157.0" layoutY="60.0" text="DATA DE INCLUSÃO:" />
+                              <Label layoutX="157.0" layoutY="60.0" text="DATA DE INCLUSÃO:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
                               <TextField fx:id="txt_qtd" layoutX="389.0" layoutY="143.0" prefHeight="26.0" prefWidth="50.0" text="1" />
                               <Button fx:id="btn_cancelar" layoutX="392.0" layoutY="263.0" mnemonicParsing="false" onAction="#btn_cancelar_click" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #8B0000;" text="Cancelar Edição" textFill="WHITE" visible="false" />
                            </children>

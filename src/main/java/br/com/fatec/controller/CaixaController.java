@@ -8,6 +8,7 @@ import br.com.fatec.model.Funcionario;
 import br.com.fatec.model.Produto;
 import br.com.fatec.model.Venda;
 import br.com.fatec.model.VendaProduto;
+import br.com.fatec.utils.SessionManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -129,7 +130,7 @@ public class CaixaController {
 
             Venda venda = new Venda();
             venda.setCliente(cliente);
-            venda.setOperador(operadorLogado); // Adiciona o operador logado
+            venda.setOperador(SessionManager.getOperadorLogado()); // Adiciona o operador logado
             venda.setDataHora(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             venda.setProdutos(vendaProdutos);
 

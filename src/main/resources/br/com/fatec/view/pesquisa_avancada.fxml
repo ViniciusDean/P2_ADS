@@ -37,23 +37,40 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <VBox prefHeight="498.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.fatec.controller.PesquisaAvancadaController">  <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #dcdcdc;" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #b9b6be;" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="btn_sair" layoutX="84.0" layoutY="353.0" mnemonicParsing="false" onAction="#btn_sair_click" style="-fx-background-color: #7f0126;" text="Sair" textFill="#f8f6f6" />
+            <Button fx:id="btn_sair" layoutX="96.0" layoutY="386.0" mnemonicParsing="false" onAction="#btn_sair_click" style="-fx-background-color: #8B0000; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Sair" textFill="#f8f6f6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
             <TextField fx:id="txt_produto" layoutX="35.0" layoutY="81.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO PRODUTO:" />
             <TextField fx:id="txt_fornecedor" layoutX="35.0" layoutY="32.0" prefHeight="26.0" prefWidth="170.0" promptText="NOME DO FORNECEDOR:" />
             <ComboBox fx:id="cmb_embalagem" layoutX="35.0" layoutY="151.0" prefHeight="26.0" prefWidth="170.0" />
-            <Text layoutX="35.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por embalagem" />
+            <Text layoutX="36.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar por embalagem">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
             <TextField fx:id="txt_preco_max" layoutX="152.0" layoutY="222.0" prefHeight="26.0" prefWidth="73.0" />
             <TextField fx:id="txt_preco_min" layoutX="14.0" layoutY="222.0" prefHeight="26.0" prefWidth="74.0" />
-            <Text layoutX="14.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço minimo" />
-            <Text layoutX="151.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço maximo" />
-            <TableView fx:id="table_produto" layoutX="254.0" layoutY="-1.0" prefHeight="498.0" prefWidth="558.0">
+            <Text layoutX="14.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço minimo">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+            <Text layoutX="151.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço maximo">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
+            <TableView fx:id="table_produto" layoutX="254.0" layoutY="-1.0" prefHeight="466.0" prefWidth="558.0" style="-fx-background-color: #a1afbf;">
               <columns>
                                   <TableColumn fx:id="col_nome" prefWidth="136.79998779296875" text="Nome" />
                                   <TableColumn fx:id="col_preco" prefWidth="52.79998779296875" text="Preço" />
@@ -62,7 +79,13 @@
                                     <TableColumn fx:id="col_fornecedor" minWidth="4.800048828125" prefWidth="232.0" text="Fornecedor" />
                                 </columns>
             </TableView>
-            <Button fx:id="btn_limpar" layoutX="46.0" layoutY="320.0" mnemonicParsing="false" onAction="#btn_limpar_click" prefHeight="26.0" prefWidth="117.0" text="Limpar Filtros" />
+            <Button fx:id="btn_limpar" layoutX="61.0" layoutY="322.0" mnemonicParsing="false" onAction="#btn_limpar_click" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Limpar Filtros" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
          </children>
     </AnchorPane>
   </children>

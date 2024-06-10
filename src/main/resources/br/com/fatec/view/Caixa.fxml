@@ -48,23 +48,23 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #b9b6be;" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="txt_cpf" layoutX="22.0" layoutY="30.0" prefHeight="25.0" prefWidth="170.0" />
-            <TextField fx:id="txt_nome" layoutX="23.0" layoutY="85.0" prefHeight="25.0" prefWidth="170.0" />
-            <TextField fx:id="txt_id" layoutX="207.0" layoutY="84.0" prefHeight="26.0" prefWidth="25.0" />
-            <TextField fx:id="txt_codBarras" layoutX="327.0" layoutY="43.0" prefHeight="25.0" prefWidth="292.0" />
-            <Label layoutX="24.0" layoutY="13.0" text="CPF:">
+            <TextField fx:id="txt_cpf" layoutX="22.0" layoutY="48.0" prefHeight="25.0" prefWidth="170.0" />
+            <TextField fx:id="txt_nome" layoutX="23.0" layoutY="96.0" prefHeight="25.0" prefWidth="170.0" />
+            <TextField fx:id="txt_id" layoutX="207.0" layoutY="96.0" prefHeight="26.0" prefWidth="25.0" />
+            <TextField fx:id="txt_codBarras" layoutX="327.0" layoutY="47.0" prefHeight="25.0" prefWidth="292.0" />
+            <Label layoutX="24.0" layoutY="30.0" text="CPF:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label layoutX="25.0" layoutY="69.0" text="NOME:">
+            <Label layoutX="25.0" layoutY="78.0" text="NOME:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label layoutX="327.0" layoutY="21.0" text="COD BARRAS:">
+            <Label layoutX="327.0" layoutY="30.0" text="COD BARRAS:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Button fx:id="btn_adicionar" layoutX="426.0" layoutY="78.0" mnemonicParsing="false" onAction="#btn_adicionar_click" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="ADICIONAR" textFill="WHITE">
+            <Button fx:id="btn_adicionar" layoutX="426.0" layoutY="82.0" mnemonicParsing="false" onAction="#btn_adicionar_click" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="ADICIONAR" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -72,7 +72,7 @@
                   <DropShadow />
                </effect>
             </Button>
-            <Label layoutX="202.0" layoutY="60.0" text="COD FILIAÇÃO:">
+            <Label layoutX="206.0" layoutY="79.0" text="COD FILIAÇÃO:">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
@@ -88,12 +88,33 @@
                   <Group layoutX="-12.0" />
                </children>
             </AnchorPane>
-            <Button fx:id="btn_confirmar" layoutX="367.0" layoutY="117.0" mnemonicParsing="false" onAction="#btn_confirmar_click" prefHeight="26.0" prefWidth="229.0" text="Confirmar Venda" />
-            <Button fx:id="btn_voltar" layoutX="578.0" layoutY="8.0" mnemonicParsing="false" onAction="#btn_voltar_click" text="Voltar" />
-            <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" />
+            <Button fx:id="btn_confirmar" layoutX="362.0" layoutY="131.0" mnemonicParsing="false" onAction="#btn_confirmar_click" prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #66CDAA; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="CONFIRMAR VENDA" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <Button fx:id="btn_voltar" layoutX="565.0" layoutY="7.0" mnemonicParsing="false" onAction="#btn_voltar_click" style="-fx-background-color: #4b95c3; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="Voltar" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Text layoutX="23.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Text>
             <Text fx:id="lbl_preco" layoutX="65.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Button fx:id="btn_pesquisar" layoutX="207.0" layoutY="30.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" text="Pesquisar" />
-            <TextField fx:id="txt_total" layoutX="65.0" layoutY="131.0" prefHeight="26.0" prefWidth="55.0" />
+            <Button fx:id="btn_pesquisar" layoutX="204.0" layoutY="40.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" style="-fx-background-color: #66CDAA; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: black; -fx-border-width: 1.5;" text="PESQUISAR" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect></Button>
+            <TextField fx:id="txt_total" layoutX="69.0" layoutY="131.0" prefHeight="26.0" prefWidth="55.0" />
          </children>
     </AnchorPane>
   </children>
