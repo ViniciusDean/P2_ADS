@@ -107,6 +107,11 @@ public class FuncionarioCadastroController {
 
     @FXML
     private void btn_salvar_click() {
+        if (!camposPreenchidos()) {
+            showAlert("Erro de Validação", "Preencha todos os campos obrigatórios.", Alert.AlertType.ERROR);
+            return;
+        }
+
         try {
             if (funcionarioCollection == null) {
                 funcionarioCollection = new ArrayList<>();
@@ -122,10 +127,6 @@ public class FuncionarioCadastroController {
 
             // Formatar a data para o formato YYYY-MM-DD
             LocalDate dataNasc = data_nasc.getValue();
-            if (dataNasc == null) {
-                showAlert("Erro de Validação", "Data de nascimento é obrigatória.", Alert.AlertType.ERROR);
-                return;
-            }
             String dataNascFormatada = dataNasc.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             funcionarioCollection.add(dataNascFormatada);        // Índice 6
             funcionarioCollection.add(cmb_contrato.getValue());  // Índice 7
@@ -171,6 +172,8 @@ public class FuncionarioCadastroController {
             // Handle the exception if txt_id contains invalid integer
             showAlert("Erro de Formato", "ID deve ser um número.", Alert.AlertType.ERROR);
         }
+        loadFuncionarios();
+        searchId();
     }
 
     @FXML
@@ -341,8 +344,6 @@ public class FuncionarioCadastroController {
             showAlert("Erro de Validação", "Nenhum funcionário selecionado para exclusão.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Adicionar o funcionário a ser excluído em uma coleção temporária
         List<Funcionario> funcionariosParaRemover = new ArrayList<>();
         funcionariosParaRemover.add(funcionarioSelecionado);
 
@@ -368,6 +369,7 @@ public class FuncionarioCadastroController {
             showAlert("Erro de SQL", "Erro ao excluir no banco de dados: " + e.getMessage(), Alert.AlertType.ERROR);
         }
         loadFuncionarios();
+        searchId();
     }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
@@ -386,6 +388,20 @@ public class FuncionarioCadastroController {
         } catch (SQLException e) {
             showAlert("Erro ao buscar próximo ID", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    private boolean camposPreenchidos() {
+        return !txt_id.getText().isEmpty()
+                && !txt_username.getText().isEmpty()
+                && !txt_nome.getText().isEmpty()
+                && !txt_email.getText().isEmpty()
+                && !txt_ddd.getText().isEmpty()
+                && !txt_telefone.getText().isEmpty()
+                && !txt_cpf.getText().isEmpty()
+                && data_nasc.getValue() != null
+                && cmb_contrato.getValue() != null
+                && !txt_cep.getText().isEmpty()
+                && !txt_senha.getText().isEmpty();
     }
 
 }

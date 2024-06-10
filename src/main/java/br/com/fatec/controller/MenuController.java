@@ -70,14 +70,17 @@ public class MenuController {
 
     @FXML
     private void btn_caixa_click() throws IOException {
+        Stage stage = (Stage) btn_caixa.getScene().getWindow();
+        stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/Caixa.fxml"));
-        Parent root = loader.load();
 
+        Parent root = loader.load();
         CaixaController caixaController = loader.getController();
         caixaController.setOperadorLogado(operadorLogado);
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        System.out.println(operadorLogado);
+        Stage menuStage = new Stage();
+        menuStage.setScene(new Scene(root));
+        menuStage.show();
     }
 
     public void setOperadorLogado(Funcionario operadorLogado) {
