@@ -53,8 +53,19 @@ public class MenuController {
 
     @FXML
     private void btn_sair_click() {
-        // Lógica para sair da aplicação
-        System.exit(0);
+        try {
+            Stage stage = (Stage) btn_sair.getScene().getWindow();
+            stage.close();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/login.fxml"));
+            Parent root = loader.load();
+
+            Stage menuStage = new Stage();
+            menuStage.setScene(new Scene(root));
+            menuStage.show();
+        } catch (IOException e) {
+            showAlert("Erro", "Erro ao carregar a tela do menu: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML

@@ -93,6 +93,7 @@
             <Text layoutX="25.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" />
             <Text fx:id="lbl_preco" layoutX="65.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button fx:id="btn_pesquisar" layoutX="207.0" layoutY="30.0" mnemonicParsing="false" onAction="#btn_pesquisar_click" text="Pesquisar" />
+            <TextField fx:id="txt_total" layoutX="65.0" layoutY="131.0" prefHeight="26.0" prefWidth="55.0" />
          </children>
     </AnchorPane>
   </children>

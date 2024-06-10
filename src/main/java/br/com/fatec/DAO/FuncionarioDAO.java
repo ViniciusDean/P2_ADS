@@ -83,16 +83,34 @@ public class FuncionarioDAO implements DAO<Funcionario> {
 
     @Override
     public boolean remove(Funcionario model) throws SQLException {
-        String sql = "DELETE FROM funcionario WHERE id = ?";
+        String sqlDeleteVendaProduto = "DELETE FROM venda_produto WHERE venda_id IN (SELECT id FROM venda WHERE operador_id = ?)";
+        String sqlDeleteVendas = "DELETE FROM venda WHERE operador_id = ?";
+        String sqlDeleteFuncionario = "DELETE FROM funcionario WHERE id = ?";
+
         Banco.conectar();
-        pst = Banco.obterConexao().prepareStatement(sql);
-        pst.setInt(1, model.getId());
-        if (pst.executeUpdate() >= 1) {
+
+        try {
+            // Deletar os registros de venda_produto associados às vendas do funcionário
+            pst = Banco.obterConexao().prepareStatement(sqlDeleteVendaProduto);
+            pst.setInt(1, model.getId());
+            pst.executeUpdate();
+
+            // Deletar as vendas associadas ao funcionário
+            pst = Banco.obterConexao().prepareStatement(sqlDeleteVendas);
+            pst.setInt(1, model.getId());
+            pst.executeUpdate();
+
+            // Deletar o funcionário
+            pst = Banco.obterConexao().prepareStatement(sqlDeleteFuncionario);
+            pst.setInt(1, model.getId());
+            int result = pst.executeUpdate();
+
             Banco.desconectar();
-            return true;
+            return result > 0;
+        } catch (SQLException e) {
+            Banco.desconectar();
+            throw e;
         }
-        Banco.desconectar();
-        return false;
     }
 
     @Override

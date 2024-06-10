@@ -351,7 +351,6 @@ public class FuncionarioCadastroController {
             for (Funcionario funcionario : funcionariosParaRemover) {
                 if (funcionarios.contains(funcionario)) {
                     funcionarios.remove(funcionario);
-                    System.out.println("to aqui");
                 }
             }
 

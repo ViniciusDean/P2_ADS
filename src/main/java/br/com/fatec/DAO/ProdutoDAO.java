@@ -173,4 +173,20 @@ public class ProdutoDAO implements DAO<Produto> {
         Banco.desconectar();
         return produto;
     }
+
+    public boolean removerProdutoDependencias(int produtoId) throws SQLException {
+        Banco.conectar();
+        String sqlRemoverDependencias = "DELETE FROM venda_produto WHERE produto_id = ?";
+        pst = Banco.obterConexao().prepareStatement(sqlRemoverDependencias);
+        pst.setInt(1, produtoId);
+        pst.executeUpdate();
+
+        String sqlRemoverProduto = "DELETE FROM produto WHERE id = ?";
+        pst = Banco.obterConexao().prepareStatement(sqlRemoverProduto);
+        pst.setInt(1, produtoId);
+        int linhasAfetadas = pst.executeUpdate();
+
+        Banco.desconectar();
+        return linhasAfetadas > 0;
+    }
 }

@@ -18,7 +18,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
 
     @Override
     public boolean insere(Fornecedor model) throws SQLException {
-        String sql = "INSERT INTO fornecedor (cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO fornecedor (cep, telefone, razao_social, email, cnpj, regime_tributacao, tipo_frete, devolucao, cancelamento, id, tipo_fornecedor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
         pst.setString(1, model.getCep());
@@ -31,6 +31,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         pst.setString(8, String.valueOf(model.getDevolucao()));
         pst.setString(9, String.valueOf(model.getCancelamento()));
         pst.setInt(10, model.getId());
+        pst.setString(11, model.getTipo_fornecedor());
 
         if (pst.executeUpdate() >= 1) {
             Banco.desconectar();
@@ -71,10 +72,10 @@ public class FornecedorDAO implements DAO<Fornecedor> {
 
     @Override
     public boolean altera(Fornecedor model) throws SQLException {
-        String sql = "UPDATE fornecedor SET cep = ?, telefone = ?, razao_social = ?, email = ?, cnpj = ?, regime_tributacao = ?, tipo_frete = ?, devolucao = ?, cancelamento = ? WHERE id = ?";
+        String sql = "UPDATE fornecedor SET cep = ?, telefone = ?, razao_social = ?, email = ?, cnpj = ?, regime_tributacao = ?, tipo_frete = ?, devolucao = ?, cancelamento = ?, tipo_fornecedor = ? WHERE id = ?";
         Banco.conectar();
         pst = Banco.obterConexao().prepareStatement(sql);
-        pst.setInt(10, model.getId());
+        pst.setInt(11, model.getId());
         pst.setString(1, model.getCep());
         pst.setString(2, model.getTelefone());
         pst.setString(3, model.getRazao_social());
@@ -84,6 +85,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
         pst.setString(7, model.getTipo_frete());
         pst.setString(8, String.valueOf(model.getDevolucao()));
         pst.setString(9, String.valueOf(model.getCancelamento()));
+        pst.setString(10, model.getTipo_fornecedor());
 
         if (pst.executeUpdate() >= 1) {
             Banco.desconectar();
@@ -113,6 +115,7 @@ public class FornecedorDAO implements DAO<Fornecedor> {
             fornecedor.setTipo_frete(rs.getString("tipo_frete"));
             fornecedor.setDevolucao(rs.getString("devolucao").charAt(0));
             fornecedor.setCancelamento(rs.getString("cancelamento").charAt(0));
+            fornecedor.setTipo_fornecedor(rs.getString("tipo_fornecedor"));
         }
         Banco.desconectar();
         return fornecedor;
@@ -137,6 +140,8 @@ public class FornecedorDAO implements DAO<Fornecedor> {
             fornecedor.setTipo_frete(rs.getString("tipo_frete"));
             fornecedor.setDevolucao(rs.getString("devolucao").charAt(0));
             fornecedor.setCancelamento(rs.getString("cancelamento").charAt(0));
+            fornecedor.setTipo_fornecedor(rs.getString("tipo_fornecedor"));
+
             listagem.add(fornecedor);
         }
         Banco.desconectar();

@@ -126,7 +126,7 @@ public class FornecedorCadastroController {
                 if (fornecedor != null) {
                     preencherCampos(fornecedor);
                     buscarCep(fornecedor.getCep());
-                    btn_cancelarEdit.setDisable(false); // Habilita o botão de cancelar edição
+                    btn_cancelarEdit.setVisible(false);
                     tabPane.getSelectionModel().select(0);
                     tab_dados.setDisable(false);
                 } else {
@@ -140,20 +140,21 @@ public class FornecedorCadastroController {
         }
     }
 
-    private void deleteFornecedorAndProdutos(Fornecedor fornecedor) throws SQLException {
+    private void deleteFornecedorEProdutos(Fornecedor fornecedor) throws SQLException {
         List<Produto> produtos = fornecedorDAO.getProdutosDoFornecedor(fornecedor);
         if (!produtos.isEmpty()) {
             for (Produto produto : produtos) {
                 try {
+                    produtoDAO.removerProdutoDependencias(produto.getId());
                     produtoDAO.remove(produto);
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     showAlert("Erro ao Excluir", "Não foi possível excluir um dos produtos: " + e.getMessage(), Alert.AlertType.ERROR);
                 }
             }
-            fornecedorDAO.remove(fornecedor);
-
         }
+        fornecedorDAO.remove(fornecedor);
     }
 
     @FXML
@@ -181,7 +182,7 @@ public class FornecedorCadastroController {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     try {
-                        deleteFornecedorAndProdutos(fornecedorSelecionado);
+                        deleteFornecedorEProdutos(fornecedorSelecionado);
                         loadFornecedorData();
                     } catch (SQLException ex) {
                         showAlert("ERRO", "NÃO FOI POSSIVEL DELETAR", Alert.AlertType.ERROR);
@@ -441,7 +442,6 @@ public class FornecedorCadastroController {
         fornecedor.setCancelamento(cancelamento.charAt(0));
         fornecedor.setDevolucao(devolucao.charAt(0));
         fornecedor.setCancelamento(cancelamento.charAt(0));
-
         try {
             if (fornecedorDAO.idExiste(fornecedor.getId())) {
                 if (fornecedorDAO.altera(fornecedor)) {
@@ -452,7 +452,7 @@ public class FornecedorCadastroController {
                 }
             } else {
                 if (fornecedorDAO.insere(fornecedor)) {
-                    showAlert("Sucesso", "Fornecedor salvo com sucesso!", Alert.AlertType.CONFIRMATION);
+                    showAlert("Sucesso", "Fornecedor salvo com sucesso!", Alert.AlertType.INFORMATION);
                     loadFornecedorData();
 
                 } else {
@@ -483,11 +483,11 @@ public class FornecedorCadastroController {
         radio_cancelar.setSelected(fornecedor.getCancelamento() == 'S');
         String telefoneCompleto = fornecedor.getTelefone();
         if (telefoneCompleto != null && telefoneCompleto.length() >= 2) {
-            txt_ddd.setText(telefoneCompleto.substring(0, 2)); // Os primeiros 2 dígitos são o DDD
-            txt_telefone.setText(telefoneCompleto.substring(3)); // O restante é o telefone
+            txt_ddd.setText(telefoneCompleto.substring(0, 2));
+            txt_telefone.setText(telefoneCompleto.substring(3));
         } else {
             txt_ddd.setText("");
-            txt_telefone.setText(telefoneCompleto); // Caso o telefone esteja incorreto, ele será exibido inteiro
+            txt_telefone.setText(telefoneCompleto);
         }
     }
 

@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 public class CaixaController {
 
     @FXML
-    private TextField txt_cpf, txt_nome, txt_id, txt_codBarras;
+    private TextField txt_cpf, txt_nome, txt_id, txt_codBarras, txt_total;
 
     @FXML
     private TableView<Produto> table_produtos;
@@ -100,6 +100,7 @@ public class CaixaController {
                     produto.setQuantidade(1); // Define a quantidade inicial como 1
                     produtos.add(produto);
                 }
+                atualizarTotal();
             } else {
                 showAlert("Erro", "Produto não encontrado!", Alert.AlertType.ERROR);
             }
@@ -146,12 +147,21 @@ public class CaixaController {
         }
     }
 
+    private void atualizarTotal() {
+        double total = 0.0;
+        for (Produto produto : produtos) {
+            total += produto.getPreco_venda() * produto.getQuantidade();
+        }
+        txt_total.setText(String.format("%.2f", total));
+    }
+
     private void limparCampos() {
         txt_cpf.clear();
         txt_nome.clear();
         txt_id.clear();
         txt_codBarras.clear();
         produtos.clear();
+        txt_total.clear();
     }
 
     private void showAlert(String title, String content, Alert.AlertType alertType) {
