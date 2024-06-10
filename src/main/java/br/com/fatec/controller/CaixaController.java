@@ -191,5 +191,6 @@ public class CaixaController {
 
     public void setOperadorLogado(Funcionario operadorLogado) {
         this.operadorLogado = operadorLogado;
+        System.out.println("to aqui");
     }
 }

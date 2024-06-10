@@ -84,6 +84,7 @@ public class ProdutoCadastroController {
                     if (produtoDAO.idExiste(produto.getId())) {
                         if (produtoDAO.altera(produto)) {
                             showAlert("Sucesso", "Produto atualizado com sucesso!", Alert.AlertType.INFORMATION);
+                            btn_cancelar.setVisible(false);
 
                         } else {
                             showAlert("Erro", "Erro ao atualizar o produto.", Alert.AlertType.ERROR);
@@ -99,6 +100,7 @@ public class ProdutoCadastroController {
                     limparCampos();
                     searchId();
                     loadProdutoData();
+                    btn_cancelar.setVisible(false);
 
                 }
             } catch (Exception e) {

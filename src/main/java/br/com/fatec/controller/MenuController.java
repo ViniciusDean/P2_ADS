@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 
 public class MenuController {
 
+    private static boolean operadorSet = false;
+
     private Funcionario operadorLogado;
     @FXML
     private Button btn_fornecedor;
@@ -70,10 +72,10 @@ public class MenuController {
 
     @FXML
     private void btn_caixa_click() throws IOException {
+
         Stage stage = (Stage) btn_caixa.getScene().getWindow();
         stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/br/com/fatec/view/Caixa.fxml"));
-
         Parent root = loader.load();
         CaixaController caixaController = loader.getController();
         caixaController.setOperadorLogado(operadorLogado);
